@@ -4,8 +4,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Jorge Jiménez Navas
+ * @author Carlos Gonzalez Diaz
  * @version     1.0
  */
 public class ListaPuertosEspaciales {
@@ -17,19 +17,35 @@ public class ListaPuertosEspaciales {
      * @param capacidad
      */
     public ListaPuertosEspaciales(int capacidad) {
-        
-		
+        this.lista = new PuertoEspacial[capacidad];
+
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i < lista.length; i++){
+            if (lista[i] != null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        boolean estaLlena = false;
+        if (getOcupacion() == lista.length){
+            estaLlena = true;
+        }
+        return estaLlena;
     }
 	// TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
+        int puerto;
+        for (i = 0; i < lista.length; i++){
+            if (lista [i] != null){
+                puerto = lista [i].getMuelles();
+            }
+        }
         return null;
     }
 
