@@ -2,7 +2,7 @@
  * Description of the class
  *
  * @author Carlos Gonzalez Diaz
- * @author Jorge
+ * @author Jorge Jiménez Navas
  * @version     1.0
  */
 public class Nave {
@@ -52,14 +52,11 @@ public class Nave {
      * TODO: Crea un String con los datos de una nave con el siguiente formato:
      * @return ejemplo del formato -> "Planet Express One (EP-245732X): 40 contenedores, hasta 1.57 UA"
      */
-    public String toString() {return "Planet Express One (" + this.getMatricula() + "): " + (this.getFilas()*this.getColumnas()) + ", hasta " + this.getAlcance();}
-
-
+    public String toString() {return "Planet Express One (" + this.getMatricula() + "): " + (this.getFilas()*this.getColumnas()) + " contenedores, hasta " + this.getAlcance() + " UA.";}
     /**
      * TODO: Crea un String con los datos de una nave con el siguiente formato:
      * @return ejemplo del formato -> "Planet Express One (EP-245732X)"
      */
     public String toStringSimple() {
         return "Planet Express One (" + this.getMatricula() + ")";
-    }
-}
+    }}
