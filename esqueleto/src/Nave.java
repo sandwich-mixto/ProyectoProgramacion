@@ -15,12 +15,12 @@ public class Nave {
     /**
      * Constructor of the class
      *
-     * @param marca
-     * @param modelo
-     * @param matricula
-     * @param columnas
-     * @param filas
-     * @param alcance
+     * @param marca Fabricante de la nave.
+     * @param modelo Modelo del vehículo.
+     * @param matricula Registro.
+     * @param columnas Tamaño vertical de la bodega de carga.
+     * @param filas Capacidad horizontal de la nave.
+     * @param alcance Distancia máxima que puede recorrer.
      */
     public Nave(String marca, String modelo, String matricula, int columnas, int filas, double alcance) {
         this.marca = marca;
