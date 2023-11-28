@@ -4,8 +4,8 @@ import static java.lang.Math.sin;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Jorge Jiménez Navas
+ * @author Carlos Gonzalez Díaz
  * @version     1.0
  */
 public class PuertoEspacial {
