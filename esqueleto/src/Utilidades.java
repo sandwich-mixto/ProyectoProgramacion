@@ -3,8 +3,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Jorge Jiménez Navas
+ * @author Carlos Gonzalez Diaz
  * @version     1.0
  */
 public class Utilidades {
@@ -19,9 +19,12 @@ public class Utilidades {
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
-
-
-        return numero;
+        numero = teclado.nextInt();
+        if (numero < minimo || numero > maximo) {
+            System.out.println(mensaje);
+        } else {
+            return numero;
+        }
     }
 
     /**
@@ -34,9 +37,12 @@ public class Utilidades {
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
-
-
-        return numero;
+        numero = teclado.nextLong();
+        if (numero < minimo || numero > maximo) {
+            System.out.println(mensaje);
+        } else {
+            return numero;
+        }
     }
 
     /**
@@ -49,8 +55,11 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
-
-        return numero;
+        numero = teclado.nextDouble();
+        if (numero < minimo || numero > maximo) {
+            System.out.println(mensaje);
+        }
+            return numero;
     }
 
     /**
@@ -63,6 +72,7 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
+        letra = teclado.
 
 
 
