@@ -1,12 +1,14 @@
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Jorge Jiménez Navas
+ * @author Carlos Gonzalez Díaz
  * @version     1.0
  */
 public class PuertoEspacial {
-
     private String nombre;
     private String codigo;
     private double radio;
@@ -17,12 +19,12 @@ public class PuertoEspacial {
     /**
      * Constructor of the class
      *
-     * @param nombre
-     * @param codigo
-     * @param radio
-     * @param azimut
-     * @param polar
-     * @param numMuelles
+     * @param nombre el nombre del puerto espacial
+     * @param codigo el codigo identificativo otorgado por la Galactic Federation of Spaceport Coordination
+     * @param radio las unidades de distancia desde el sol hasta el punto dado
+     * @param azimut  el ángulo desde el eje positivo x hasta la proyección del punto en el plano xy
+     * @param polar el ángulo desde el eje positivo z hasta el puerto
+     * @param numMuelles número de muelles de carga del puerto espacial
      */
     public PuertoEspacial(String nombre, String codigo, double radio, double azimut, double polar, int numMuelles) {
         this.nombre = nombre;
@@ -60,10 +62,20 @@ public class PuertoEspacial {
      */
     public double distancia(PuertoEspacial destino) {
         // TODO: Para calcular la distancia entre dos Puertos Espaciales, se transforman sus coordenadas esféricas a cartesianas
+        //salida
+        double x2 = destino.getRadio() * sin(destino.getAzimut()) * cos (destino.getPolar());
+        double y2 = destino.getRadio() * sin(destino.getAzimut()) * sin(destino.getPolar());
+        double z2 = destino.getRadio() * cos(destino.getAzimut());
+
+        //destino
+        double x1 = getRadio() * sin(getAzimut()) * cos (getPolar());
+        double y1 = getRadio() * sin(getAzimut()) * sin(getPolar());
+        double z1 = getRadio() * cos(getAzimut());
 
 
         // TODO: Una vez se tienen las coordenadas cartesianas, basta con calcular la distancia euclídea entre ellas:
-        return ;
+        double distancia = Math.sqrt(Math.pow(x2 - x1,2) - Math.pow(y2 - y1,2) - Math.pow(z2 - z1,2));
+        return distancia ;
     }
 
     /**
@@ -71,7 +83,7 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal(GGT), en (1.0 90.0 0.0), con 8 muelles" (Radio, Azimut, Polar)
      */
     public String toString() {
-        return " ";
+        return nombre + "(" + codigo + "), en (" + radio + ", " + azimut + ", " + polar + ")" + " con " + numMuelles + " muelles"  ;
     }
 
     /**
@@ -79,6 +91,6 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
      */
     public String toStringSimple() {
-        return " ";
+        return nombre + " (" + codigo + ")";
     }
 }
