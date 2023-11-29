@@ -20,11 +20,10 @@ public class Utilidades {
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
         numero = teclado.nextInt();
-        if (numero < minimo || numero > maximo) {
+        while (numero < minimo || numero > maximo) {
             System.out.println(mensaje);
-        } else {
-            return numero;
         }
+            return numero;
     }
 
     /**
@@ -38,11 +37,10 @@ public class Utilidades {
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
         numero = teclado.nextLong();
-        if (numero < minimo || numero > maximo) {
+        while (numero < minimo || numero > maximo) {
             System.out.println(mensaje);
-        } else {
-            return numero;
         }
+            return numero;
     }
 
     /**
@@ -56,7 +54,7 @@ public class Utilidades {
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
         numero = teclado.nextDouble();
-        if (numero < minimo || numero > maximo) {
+        while (numero < minimo || numero > maximo) {
             System.out.println(mensaje);
         }
             return numero;
@@ -72,10 +70,10 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
-        letra = teclado.
-
-
-
+        letra = teclado.next().charAt(0);
+        while (letra < minimo || letra > maximo){
+            System.out.println(mensaje);
+        }
         return letra;
     }
 
@@ -87,13 +85,33 @@ public class Utilidades {
      * @return Fecha
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
+        System.out.println(mensaje);
+        Fecha fecha = null;
         int dia;
+        do {
+            System.out.print("Ingrese día: ");
+            dia = teclado.nextInt();
+        } while (dia >= 0 && dia <= Fecha.DIAS_MES);
+
         int mes;
+        do{
+            System.out.print("Ingrese mes: ");
+            mes = teclado .nextInt();
+        } while (mes >= 1 && mes <= Fecha.MESES_ANIO);
+
         int anio;
+        do {
+            System.out.print("Ingrese año: ");
+            anio = teclado.nextInt();
+        } while (anio >= Fecha.PRIMER_ANIO && anio <= Fecha.ULTIMO_ANIO);
 
+        fecha = new Fecha(dia, mes, anio);
 
+        if (Fecha.comprobarFecha(dia, mes, anio) == false){
+            fecha = leerFecha(teclado, "Fecha incorrecta.");
+        }
 
-        return new Fecha(dia, mes, anio);
+        return fecha;
     }
 
 
@@ -104,13 +122,48 @@ public class Utilidades {
      * @return Fecha
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
+        System.out.println(mensaje);
+        Fecha fecha = null;
         int dia;
-        int mes;
-        int anio;
-        int hora;
-        int minuto;
-        int segundo;
+        do {
+            System.out.print("Ingrese día: ");
+            dia = teclado.nextInt();
+        } while (dia >= 1 && dia <= 31);
 
+        int mes;
+        do{
+            System.out.print("Ingrese mes: ");
+            mes = teclado .nextInt();
+        } while (mes >= 1 && mes <= 12);
+
+        int anio;
+        do {
+            System.out.print("Ingrese año: ");
+            anio = teclado.nextInt();
+        } while (anio >= Fecha.PRIMER_ANIO && anio <= Fecha.ULTIMO_ANIO);
+
+        int hora;
+        do{
+            System.out.print("Ingrese hora: ");
+            hora = teclado.nextInt();
+        } while (hora >= 0 && hora <= Fecha.HORAS_DIA);
+
+        int minuto;
+        do {
+            System.out.print("Ingrese minuto: ");
+            minuto = teclado.nextInt();
+        } while (minuto >= 0 && minuto <= Fecha.MINUTOS_HORA);
+
+        int segundo;
+        do {
+            System.out.print("Ingrese segundo: ");
+            segundo = teclado.nextInt();
+        } while (segundo >= 0 && segundo <= Fecha.SEGUNDOS_MINUTO);
+
+        fecha = new Fecha(dia, mes, anio, hora, minuto, segundo);
+        if ((Fecha.comprobarFecha(dia, mes, anio) == false) || (Fecha.comprobarHora(hora, minuto, segundo) == false)){
+            fecha = leerFechaHora(teclado, "Fecha incorrecta.");
+        }
 
 
         return new Fecha(dia, mes, anio, hora, minuto, segundo);
