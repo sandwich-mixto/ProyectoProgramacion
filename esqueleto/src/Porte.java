@@ -2,12 +2,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
-
 /**
  * Description of the class
  *
  * @author Carlos Gonzalez Diaz
- * @author Jorge
+ * @author Jorge Jiménez Navas
  * @version     1.0
  */
 public class Porte {
@@ -32,7 +31,7 @@ public class Porte {
      * @param muelleOrigen Muelle del que partirá la nave con el envío.
      * @param salida Fecha de salida del envío.
      * @param destino Puerto al aue se envía el envío.
-     * @param muelleDestino Muelle al que arrivará la nave.
+     * @param muelleDestino Muelle al que arribará la nave.
      * @param llegada Fecha estimada de llegada.
      * @param precio Coste del envío.
      */
@@ -86,7 +85,12 @@ public class Porte {
         }
         return libres;
     }
-    // TODO: ¿Están llenos todos los huecos?
+
+    /**
+     * TODO: ¿Están llenos todos los huecos?
+     *
+     * @return True si no quedan huecos.
+     */
     public boolean porteLleno() {
         boolean resul = true;
         if(numHuecosLibres() == 0){
@@ -95,7 +99,7 @@ public class Porte {
         return resul;
     }
     // TODO: ¿Está ocupado el hueco consultado?
-    public boolean huecoOcupado(int fila, int columna) {return !huecos[fila][columna];}
+    public boolean huecoOcupado(int fila, int columna) {return huecos[fila][columna];}
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
@@ -109,8 +113,8 @@ public class Porte {
     /**
      * TODO: Método que Si está desocupado el hueco que indica el envio, lo pone ocupado y devuelve true,
      *  si no devuelve false
-     * @param envio
-     * @return
+     * @param envio Envío que se pretende añadir.
+     * @return True si lo puede incluir y False si no.
      */
     public boolean ocuparHueco(Envio envio) {
         boolean resul = false;
@@ -121,14 +125,17 @@ public class Porte {
     }
     /**
      * TODO: A través del localizador del envio, se desocupará el hueco
-     * @param localizador
-     * @return
+     * @param localizador Identificador para encontrar el hueco que se quiere despejar.
+     * @return True si lo consigue eliminar y False en caso contrario.
      */
     public boolean desocuparHueco(String localizador) {
-
-        return false;
+        boolean resul = false;
+        if(huecos[listaEnvios.buscarEnvio(localizador).getFila()][listaEnvios.buscarEnvio(localizador).getColumna()]){
+            huecos[listaEnvios.buscarEnvio(localizador).getFila()][listaEnvios.buscarEnvio(localizador).getColumna()] = false;
+            resul = true;
+        }
+        return resul;
     }
-
     /**
      * TODO: Devuelve una cadena con información completa del porte
      * @return ejemplo del formato -> "Porte PM0066 de Gaia Galactic Terminal(GGT) M5 (01/01/2023 08:15:00) a
@@ -150,7 +157,6 @@ public class Porte {
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
         return this.getOrigen().getCodigo().equals(codigoOrigen) && this.getDestino().getCodigo().equals(codigoDestino) && this.getSalida().coincide(fecha);
     }
-
     /**
      * TODO: Muestra la matriz de huecos del porte, ejemplo:
      *        A  B  C
@@ -172,9 +178,7 @@ public class Porte {
             }
             System.out.println();
         }
-
     }
-
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones
      *  del enunciado
@@ -185,7 +189,6 @@ public class Porte {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fichero);
-
             return true;
         } catch (FileNotFoundException e) {
             return false;
