@@ -2,23 +2,20 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
-
 /**
- * Description of the class
- *
- * @author
- * @author
+ * Description of the class.
+ * Clase que representa un envío.
+ * @author Carlos Gonzalez Diaz.
+ * @author Jorge Jiménez Navas
  * @version     1.0
  */
 public class Envio {
-
     private String localizador;
     private Porte porte;
     private Cliente cliente;
     private int fila;
     private int columna;
     private double precio;
-
     /**
      * Constructor of the class
      *
@@ -86,6 +83,7 @@ public class Envio {
      */
     public boolean generarFactura(String fichero) {
         PrintWriter pw = null;
+        boolean resul = false;
         try {
             pw = new PrintWriter(fichero);
             pw.println("-----------------------------------------------------");
@@ -100,10 +98,11 @@ public class Envio {
             pw.println("Hueco: " + this.getHueco());
             pw.println("Precio: " + precio + " SSD");
             pw.close();
-            return true;
+            resul =  true;
         } catch (FileNotFoundException e) {
-            return false;
+            resul = false;
         }
+        return resul;
     }
     /**
      *	TODO: Genera un localizador de envío. Este consistirá en una cadena de 15 caracteres, de los cuales los seis
@@ -115,8 +114,8 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-        for(int i = 0; i < 9; i++){
-            localizador.append(rand.ints(0, 9));
+        for(int i = 0; i < 10; i++){
+            localizador.append((char)rand.nextInt('A', 'Z'));
         }
         return localizador.toString();
     }
@@ -128,10 +127,34 @@ public class Envio {
      * @param rand Objeto aleatorio.
      * @param porte Porte al que se quiere añadir el envío.
      * @param cliente Usuario que realiza el envío.
-     * @return Envio para el porte y cliente especificados
+     * @return Envio para el porte y cliente especificados. Null si se cancela la operación.
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-
-        return null;
+        Envio envio = null;
+        int numFila = -1, numColumna = -1, numPrecio = -1;
+        String fila = "CANCELAR", columna = "CANCELAR", precio = "CANCELAR";
+        do {
+            System.out.print("Fila del hueco: ");
+            fila = teclado.nextLine();
+            if(!fila.equals("CANCELAR")){
+                numFila = Integer.parseInt(fila);
+                System.out.print("Columna del hueco: ");
+                columna = teclado.nextLine();
+                if(!columna.equals("CANCELAR"));{
+                    numColumna = Integer.parseInt(columna);
+                    System.out.print("Precio del envío: ");
+                    precio = teclado.nextLine();
+                    if(!precio.equals("CANCELAR"));{
+                        numPrecio = Integer.parseInt(precio);
+                    }
+                }
+            }
+        }while(porte.huecoOcupado(numFila, numColumna) && !fila.equals("CANCELAR") && !columna.equals("CANCELAR"));
+        if(!precio.equals("CANCELAR") && !columna.equals("CANCELAR") && !fila.equals("CANCELAR")){
+            String localizador = generarLocalizador(rand, porte.getID());
+            envio = new Envio(localizador, porte, cliente, numFila, numColumna, numPrecio);
+            System.out.println("Envío " + localizador + " creado correctamente. ");
+        }
+        return envio;
     }
 }
