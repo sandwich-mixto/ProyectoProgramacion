@@ -7,8 +7,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Jorge Jimenez Navas
+ * @author Carlos Gonzalez Diaz
  * @version     1.0
  */
 public class ListaEnvios {
@@ -19,20 +19,26 @@ public class ListaEnvios {
      * @param capacidad
      */
     public ListaEnvios(int capacidad) {
-		
-		
+        this.envios = new Envio[capacidad];
     }
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
-
+        int ocucpacion = 0;
+        for (int i = 0; i < envios.length; i++) {
+            if (envios[i] != null) {
+                ocucpacion++;
+            }
+        }
+        return ocucpacion;
     }
+
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
-
+        return this.getOcupacion() == envios.length;
     }
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
-        return null;
+        return envios[i];
     }
 
     /**
@@ -41,8 +47,12 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        int posicion = 0;
+        while ((envios[posicion] != null) && posicion < envios.length){
+            posicion ++;
+        }
+        envios [posicion] = envio;
+        return envios [posicion] == envio;
     }
 
     /**
@@ -51,9 +61,15 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-
-
-        return null;
+        int i = 0;
+        boolean encontrado = false;
+        while ((i < envios.length) && !encontrado){
+            if (envios [i].getLocalizador().equals(localizador)){
+                encontrado = true;
+            }
+            i++;
+        }
+        return envios[i];
     }
 
     /**
@@ -64,10 +80,16 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-
-
-        return null;
-    }
+        int x = 0;
+        boolean encontrado = false;
+        while ((x < envios.length) && !encontrado){
+                if (envios [x].getPorte().toString().equals(idPorte)){
+                    encontrado = true;
+                }
+                x++;
+            }
+            return envios[x];
+        }
 
     /**
      * TODO: Eliminamos un envio a través del localizador pasado por parámetro
@@ -75,8 +97,20 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio (String localizador) {
-
-        return false;
+        int i = 0;
+        boolean encontrado = false;
+        while ((i < envios.length) && !encontrado){
+            if (envios[i].getLocalizador().equals(localizador)){
+                encontrado = true;
+            }
+            i++;
+        }
+        if (encontrado) {
+            envios[i] = envios[i + 1];
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
