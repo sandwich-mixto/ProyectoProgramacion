@@ -72,7 +72,7 @@ public class Cliente {
         String nombre, apellidos = "CANCELAR", email = "CANCELAR";
         nombre = Utilidades.leerCadena(teclado, "Nombre: ");
         if(!nombre.equals("CANCELAR")){
-            apellidos = Utilidades.leerCCadena(teclado, "Apellidos: ");
+            apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
             if(!apellidos.equals("CANCELAR")){
                 do{
                     email = Utilidades.leerCadena(teclado, "Email: ");
