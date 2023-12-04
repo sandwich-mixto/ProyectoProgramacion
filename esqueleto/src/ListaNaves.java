@@ -58,14 +58,16 @@ public class ListaNaves {
         int i = 0;
         boolean encontrado = false;
         Nave resul = null;
-        while(i < naves.length && !encontrado){
-            if(naves[i].getMatricula().equals(matricula)){
-                encontrado = true;
+        if(matricula != null){
+            while(i < naves.length && !encontrado){
+                if(naves[i].getMatricula().equals(matricula)){
+                    encontrado = true;
+                }
+                i++;
             }
-            i++;
-        }
-        if(encontrado){
-            resul = naves[i];
+            if(encontrado){
+                resul = naves[i];
+            }
         }
         return resul;
     }
@@ -90,7 +92,7 @@ public class ListaNaves {
      * @return Nave con suficiente alcance a partir de la matrícula o null.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
-        Nave nave = null;
+        Nave nave;
         do{
             nave = buscarNave(Utilidades.leerCadena(teclado, mensaje));
         } while(nave.getAlcance() < alcance && nave != null);
@@ -120,15 +122,24 @@ public class ListaNaves {
     }
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
-     * @param fichero
-     * @param capacidad
-     * @return
+     * @param fichero Fichero del que se quieren leer los datos de las naves.
+     * @param capacidad Cantidad máxima de naves que guardará la lista.
+     * @return ListaNaves con las naves leidas del fichero o null.
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
-        Scanner sc = null;
+        int annadidas = 0;
+        Scanner sc;
+        Nave nave;
         try {
-
+            sc = new Scanner(fichero);
+            while (sc.hasNextLine() && annadidas < capacidad){
+                nave = new Nave(sc.nextLine().split(";")[0], sc.nextLine().split(";")[1], sc.nextLine().split(";")[2], Integer.parseInt(sc.nextLine().split(";")[3]), Integer.parseInt(sc.nextLine().split(";")[4]), Double.parseDouble(sc.nextLine().split(";")[5]));
+                if(listaNaves.insertarNave(nave)) {
+                    annadidas++;
+                }
+            }
+            sc.close();
         } catch (Exception e) {
             return null;
         } finally {
