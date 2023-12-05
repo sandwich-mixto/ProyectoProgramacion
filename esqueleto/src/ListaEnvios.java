@@ -131,12 +131,12 @@ public class ListaEnvios {
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         Envio envio = null;
-
-
+        do {
+            System.out.println(mensaje);
+            envio = buscarEnvio(teclado.nextLine());
+        } while (envio.getLocalizador().equals(buscarEnvio(teclado.nextLine())));
         return envio;
     }
-
-
 
     /**
      * TODO: Añade los Envios al final de un fichero CSV, SIN SOBREESCRIBIR la información
@@ -166,9 +166,9 @@ public class ListaEnvios {
         try {
 
         } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el fichero de envíos");
+            System.out.println("No se ha encontrado el fichero de envíos" + e.getMessage());
         } finally {
-
+            try ()
         }
     }
 }
