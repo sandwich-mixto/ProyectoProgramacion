@@ -92,11 +92,7 @@ public class Porte {
      * @return True si no quedan huecos.
      */
     public boolean porteLleno() {
-        boolean resul = true;
-        if(numHuecosLibres() == 0){
-            resul = false;
-        }
-        return resul;
+        return numHuecosLibres() == 0;
     }
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {return huecos[fila][columna];}
@@ -146,7 +142,7 @@ public class Porte {
      * TODO: Devuelve una cadena con información abreviada del vuelo
      * @return ejemplo del formato -> "Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05)"
      */
-    public String toStringSimple() {return "Porte " + this.getID() + " de " + this.getOrigen().getCodigo() + " " + this.getMuelleOrigen() + " (" + this.getSalida().toString() + ") a " + this.getDestino().getCodigo() + " " + getMuelleDestino() + this.getLlegada().toString() + ")";}
+    public String toStringSimple() {return "Porte " + this.getID() + " de " + this.getOrigen().getCodigo() + " " + this.getMuelleOrigen() + " (" + this.getSalida().toString() + ") a " + this.getDestino().getCodigo() + " " + getMuelleDestino() + " (" + this.getLlegada().toString() + ")";}
     /**
      * TODO: Devuelve true si el código origen, destino y fecha son los mismos que el porte
      * @param codigoOrigen Código del puerto de origen.
@@ -209,18 +205,58 @@ public class Porte {
      *  y naves y la restricción de que no puede estar repetido el identificador, siguiendo las indicaciones
      *  del enunciado.
      *  La función solicita repetidamente los parametros hasta que sean correctos
-     * @param teclado
-     * @param rand
-     * @param puertosEspaciales
-     * @param naves
-     * @param portes
-     * @return
+     * @param teclado Objeto Scanner para pedir datos al usuario.
+     * @param rand Objeto aleatorio con el que se consiguen códigos de porte.
+     * @param puertosEspaciales Lista de puertos espaciales disponibles.
+     * @param naves Lista de naves.
+     * @param portes Lista de portes.
+     * @return Porte con los datos adecuados. Null si se cancela.
      */
-    public static Porte altaPorte(Scanner teclado, Random rand,
-                                  ListaPuertosEspaciales puertosEspaciales,
-                                  ListaNaves naves,
-                                  ListaPortes portes) {
-
-        return null;
+    public static Porte altaPorte(Scanner teclado, Random rand, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves, ListaPortes portes) {
+        Porte porte = null;
+        String id = null;
+        PuertoEspacial origen = null;
+        int muelleOrigen = -1;
+        PuertoEspacial destino = null;
+        Nave nave = null;
+        int muelleDestino = -1;
+        Fecha salida = null;
+        Fecha llegada = null;
+        double precio = -1;
+        do {
+            id = generarID(rand);
+        } while (portes.buscarPorte(id) != null);
+        origen = puertosEspaciales.buscarPuertoEspacial(Utilidades.leerCadena(teclado, "Puerto de origen: "));
+        if(origen != null) {
+            muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de origen: ", 1, origen.getMuelles());
+            if(muelleOrigen != -1) {
+                destino = puertosEspaciales.buscarPuertoEspacial(Utilidades.leerCadena(teclado, "Ingrese el código del puerto de destino: "));
+                if(destino != null) {
+                    muelleDestino = Utilidades.leerNumero(teclado, "Ingrese terminal de de destino: ", 1, destino.getMuelles());
+                    if(muelleDestino != -1) {
+                        naves.mostrarNaves();
+                        do {
+                            nave = naves.buscarNave(Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: "));
+                        } while (nave.getAlcance() < origen.distancia(destino) && nave != null);
+                        if(nave != null) {
+                            salida = Utilidades.leerFecha(teclado, "Introduzca la fecha de salida: ");
+                            if(salida != null) {
+                                do {
+                                    llegada = Utilidades.leerFecha(teclado, "Introduzaca la fecha de llegada: ");
+                                } while (llegada.anterior(salida) && llegada != null);
+                                if(llegada != null) {
+                                    precio = Utilidades.leerNumero(teclado, "Ingrese precio: ", 0, 200);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(origen != null && muelleOrigen != -1 && destino != null && muelleDestino != -1 && nave != null && llegada != null && precio >= 0) {
+            porte = new Porte(id, nave, origen, muelleOrigen, salida, destino, muelleDestino, llegada, precio);
+            System.out.println("Porte " + porte.getID() + " creado con éxito.");
+        }
+        return porte;
     }
 }

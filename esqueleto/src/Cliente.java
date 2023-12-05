@@ -1,7 +1,6 @@
 import java.util.Scanner;
 /**
- * Description of the class: Clase cliente que representa a cada usuario y guarda su información.
- *
+ * Description of the class: Clase cliente que representa a cada usuario y guarda su información y envíos.
  * @author Taller de Programación
  * @version     1.0
  */
@@ -10,10 +9,8 @@ public class Cliente {
     private final String nombre;
     private final String apellidos;
     private final String email;
-
     /**
      * Constructor of the class
-     *
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
      * @param email Email del cliente
@@ -71,16 +68,21 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        String nombre, apellidos, email;
-        System.out.print("Tu nombre: ");
-        nombre = teclado.nextLine();
-        System.out.print("Tus apellidos: ");
-        apellidos = teclado.nextLine();
-        do{
-            System.out.print("Email: ");
-            email = teclado.nextLine();
-        } while (!correctoEmail(email) && clientes.buscarClienteEmail(email) != null);
-        return new Cliente(nombre, apellidos, email, maxEnvios);
+        Cliente resul = null;
+        String nombre, apellidos = "CANCELAR", email = "CANCELAR";
+        nombre = Utilidades.leerCadena(teclado, "Nombre: ");
+        if(!nombre.equals("CANCELAR")){
+            apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
+            if(!apellidos.equals("CANCELAR")){
+                do{
+                    email = Utilidades.leerCadena(teclado, "Email: ");
+                } while (!correctoEmail(email) && clientes.buscarClienteEmail(email) != null && !email.equals("CANCELAR"));
+            }
+        }
+        if(!nombre.equals("CANCELAR") && !apellidos.equals("CANCELAR") && !email.equals("CANCELAR"));{
+            resul = new Cliente(nombre, apellidos, email, maxEnvios);
+        }
+        return resul;
     }
     /**
      * TODO: Metodo para comprobar que el formato de email introducido sea correcto

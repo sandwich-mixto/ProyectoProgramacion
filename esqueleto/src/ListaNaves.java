@@ -3,16 +3,14 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Carlos Gonzalez Diaz
+ * @author Jorge Jiménez Navas
  * @version     1.0
  */
 public class ListaNaves {
     private Nave[] naves;
-
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
-     *
      * @param capacidad Tamaño máximo de la flota.
      */
     public ListaNaves(int capacidad) {
@@ -45,32 +43,44 @@ public class ListaNaves {
         while (naves[posicion] != null && posicion < naves.length){
             posicion++;
         }
-        naves[posicion] = nave;
-        return naves[posicion] == nave;
+        if(posicion < naves.length){
+            naves[posicion] = nave;
+            resul = (naves[posicion] == nave);
+        }
+        return resul;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
-     * @param matricula
-     * @return la nave que encontramos o null si no existe
+     * @param matricula Matrícula de la nave que se quiere obtener.
+     * @return Primera nave con esa matrícula o null si no existe.
      */
     public Nave buscarNave(String matricula) {
         int i = 0;
         boolean encontrado = false;
-        while(i < naves.length && !encontrado){
-            if(naves[i].getMatricula().equals(matricula)){
-                encontrado = true;
+        Nave resul = null;
+        if(matricula != null){
+            while(i < naves.length && !encontrado){
+                if(naves[i].getMatricula().equals(matricula)){
+                    encontrado = true;
+                }
+                i++;
             }
-            i++;
+            if(encontrado){
+                resul = naves[i];
+            }
         }
-        return naves[i];
+        return resul;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-
+        Nave nave;
+        for(int i = 0; i < naves.length; i++){
+            if(naves[i] != null){
+                nave = naves[i];
+                System.out.println(nave.getMarca() + " " + nave.getModelo() + " (" + nave.getMatricula() + ") " + nave.getFilas()* nave.getColumnas() + " contenedores, hasta " + nave.getAlcance() + " UA.");
+            }
+        }
     }
-
-
-
     /**
      * TODO: Permite seleccionar una nave existente a partir de su matrícula, y comprueba si dispone de un alcance
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
@@ -79,14 +89,13 @@ public class ListaNaves {
      * @param teclado Objeto Scanner para leer la entrada.
      * @param mensaje Texto impreso por pantalla con instrucciones para el usuario.
      * @param alcance Alcance mínimo que debe tener la nave seleccionada.
-     * @return
+     * @return Nave con suficiente alcance a partir de la matrícula o null.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
-        Nave nave = null;
+        Nave nave;
         do{
-            System.out.print(mensaje);
-            nave = buscarNave(teclado.nextLine());
-        } while(nave.getAlcance() < alcance);
+            nave = buscarNave(Utilidades.leerCadena(teclado, mensaje));
+        } while(nave.getAlcance() < alcance && nave != null);
         return nave;
     }
     /**
@@ -98,6 +107,12 @@ public class ListaNaves {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(nombre);
+            for(int i = 0; i < naves.length; i++){
+                if(naves[i] != null){
+                    pw.println(naves[i].getMarca() + ";" + naves[i].getModelo() + ";" + naves[i].getMatricula() + ";" + naves[i].getFilas() + ";" + naves[i].getColumnas() + ";" + naves[i].getAlcance());
+                }
+            }
+            pw.close();
             return true;
         } catch (Exception e) {
             return false;
@@ -107,15 +122,24 @@ public class ListaNaves {
     }
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
-     * @param fichero
-     * @param capacidad
-     * @return
+     * @param fichero Fichero del que se quieren leer los datos de las naves.
+     * @param capacidad Cantidad máxima de naves que guardará la lista.
+     * @return ListaNaves con las naves leidas del fichero o null.
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
-        Scanner sc = null;
+        int annadidas = 0;
+        Scanner sc;
+        Nave nave;
         try {
-
+            sc = new Scanner(fichero);
+            while (sc.hasNextLine() && annadidas < capacidad){
+                nave = new Nave(sc.nextLine().split(";")[0], sc.nextLine().split(";")[1], sc.nextLine().split(";")[2], Integer.parseInt(sc.nextLine().split(";")[3]), Integer.parseInt(sc.nextLine().split(";")[4]), Double.parseDouble(sc.nextLine().split(";")[5]));
+                if(listaNaves.insertarNave(nave)) {
+                    annadidas++;
+                }
+            }
+            sc.close();
         } catch (Exception e) {
             return null;
         } finally {
