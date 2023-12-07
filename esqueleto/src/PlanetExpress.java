@@ -179,12 +179,27 @@ public class PlanetExpress {
                 case 3:     // TODO: Buscar Porte
                     ListaPortes coincidentes =  planetExpress.buscarPorte(teclado);
                     Porte porteSeleccionado;
-                    if(coincidentes != null) {
-                        porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
-                        planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
-                    } else{
-                        System.out.println("Ningún porte reune los requisitos de búsqueda. ");
-                    }
+                    do{
+                        letra = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'e', 'n');
+                        switch (letra){
+                            case 'n':
+                                if(!planetExpress.maxClientesAlcanzado()){
+                                    planetExpress.insertarCliente(Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente));
+                                } else{
+                                    System.out.println("No se pueden añadir más usuarios. ");
+                                }
+                            case 'e':
+                                if(coincidentes != null) {
+                                    porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
+                                    planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
+                                } else{
+                                    System.out.println("Ningún porte reúne los requisitos de búsqueda. ");
+                                }
+                                break;
+                            default:
+                                System.out.println("El valor de entrada debe ser 'n' o 'e'. ");
+                        }
+                    } while (letra != 'e' && letra != 'n');
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     do {
@@ -207,7 +222,7 @@ public class PlanetExpress {
                                 } else {
                                     System.out.println("La entrada debe ser 'c' o 'f'. ");
                                 }
-                            }while (letra != ' ' && letra != 'c' && letra != 'f');
+                            }while (letra != 'c' && letra != 'f');
                         }
                     }
                     break;
