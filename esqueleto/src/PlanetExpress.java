@@ -47,10 +47,10 @@ public class PlanetExpress {
      * @param ficheroEnvios Fichero con los envíos contratados por cada cliente.
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-        listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
-        ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
-        ListaPortes.leerPortesCsv(ficheroPortes, maxPortes, listaPuertosEspaciales, listaNaves);
-        ListaClientes.leerClientesCsv(ficheroClientes, maxClientes, maxEnviosPorCliente);
+        this.listaPuertosEspaciales = ListaPuertosEspaciales.leerPuertosEspacialesCsv(ficheroPuertos, maxPuertosEspaciales);
+        this.listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
+        this.listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, maxPortes, listaPuertosEspaciales, listaNaves);
+        this.listaClientes = ListaClientes.leerClientesCsv(ficheroClientes, maxClientes, maxEnviosPorCliente);
         ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes);
     }
     /**
@@ -67,7 +67,9 @@ public class PlanetExpress {
         listaNaves.escribirNavesCsv(ficheroNaves);
         listaPortes.escribirPortesCsv(ficheroPortes);
         listaClientes.escribirClientesCsv(ficheroClientes);
-        ListaEnvios.escribirEnviosCsv(ficheroEnvios);
+        for(int i = 0; i < listaPortes.getOcupacion(); i++){
+            listaPortes.getPorte(i).generarListaEnvios(ficheroEnvios);
+        }
     }
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
