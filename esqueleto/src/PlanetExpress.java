@@ -105,8 +105,6 @@ public class PlanetExpress {
         }
         return resul;
     }
-
-
     /**
      * TODO: Metodo para contratar un envio tal y como se indica en el enunciado de la práctica. Se contrata un envio para un porte
      *  especificado, pidiendo por teclado los datos necesarios al usuario en el orden y con los textos (tomar como referencia los
@@ -123,8 +121,6 @@ public class PlanetExpress {
             }
         }
     }
-
-
     /**
      * TODO Metodo statico con la interfaz del menú de entrada a la App.
      * Tiene que coincidir con las trazas de ejecución que se muestran en el enunciado
@@ -135,7 +131,6 @@ public class PlanetExpress {
         System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3. Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
         return Utilidades.leerNumero(teclado, "Seleccione opción: ", 0, 5);
     }
-
     /**
      * TODO: Método Main que carga los datos de los ficheros CSV pasados por argumento (consola) en PlanetExpress,
      *  llama iterativamente al menú y realiza la opción especificada hasta que se indique la opción Salir. Al finalizar
@@ -155,7 +150,7 @@ public class PlanetExpress {
      * y concluirá la ejecución del mismo: `Número de argumentos incorrecto`.
      */
     public static void main(String[] args) {
-        char letra;
+        char letra = ' ';
         String email, envio, porte, fichero;
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
@@ -185,7 +180,7 @@ public class PlanetExpress {
                     ListaPortes coincidentes =  planetExpress.buscarPorte(teclado);
                     Porte porteSeleccionado;
                     if(coincidentes != null) {
-                        porteSeleccionado = coincidentes.buscarPorte(Utilidades.leerCadena(teclado, "Seleccione un porte: "));
+                        porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
                         planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
                     } else{
                         System.out.println("Ningún porte reune los requisitos de búsqueda. ");
@@ -200,19 +195,19 @@ public class PlanetExpress {
                             envio = Utilidades.leerCadena(teclado, "Seleccione un envío: ");
                         }while (envio != null && planetExpress.listaClientes.buscarClienteEmail(email).buscarEnvio(envio) != null);
                         if(envio != null){
-                            letra = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?: ", 'c', 'f');
-                            while (letra != 'c' || letra != 'f'){
-                                System.out.println("La entrada debe ser \'c\' o \'f\'. ");
+                            do {
                                 letra = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?: ", 'c', 'f');
-                            }
-                            if(letra == 'c'){
-                                planetExpress.listaClientes.buscarClienteEmail(email).cancelarEnvio(envio);
-                            }
-                            else if(letra == 'f'){
-                                do {
-                                    fichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                                }while (fichero != null && !planetExpress.listaClientes.buscarClienteEmail(email).buscarEnvio(envio).generarFactura(fichero));
-                            }
+                                if (letra == 'c') {
+                                    planetExpress.listaClientes.buscarClienteEmail(email).cancelarEnvio(envio);
+                                } else if (letra == 'f') {
+                                    do {
+                                        fichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
+                                    } while (fichero != null && !planetExpress.listaClientes.buscarClienteEmail(email).buscarEnvio(envio).generarFactura(fichero));
+                                    System.out.println("Factura generada correctamente: ");
+                                } else {
+                                    System.out.println("La entrada debe ser 'c' o 'f'. ");
+                                }
+                            }while (letra != ' ' && letra != 'c' && letra != 'f');
                         }
                     }
                     break;
@@ -229,7 +224,5 @@ public class PlanetExpress {
                     break;
             }
         } while (opcion != 0);
-
-
     }
 }
