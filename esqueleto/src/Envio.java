@@ -132,6 +132,7 @@ public class Envio {
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
         Envio envio = null;
         int fila = -1, columna = -1, precio = -1;
+        porte.imprimirMatrizHuecos();
         do {
             if((fila = Utilidades.leerNumero(teclado, "Fila del hueco: ", 1, porte.getNave().getFilas())) != -1){
                 if((columna = Utilidades.leerNumero(teclado, "Columna del hueco: ", 1, porte.getNave().getColumnas())) != -1);{
