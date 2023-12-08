@@ -85,7 +85,6 @@ public class Porte {
         }
         return libres;
     }
-
     /**
      * TODO: ¿Están llenos todos los huecos?
      *
@@ -115,6 +114,7 @@ public class Porte {
     public boolean ocuparHueco(Envio envio) {
         boolean resul = false;
         if(!this.huecoOcupado(envio.getFila(), envio.getColumna())){
+            huecos[envio.getFila()][envio.getColumna()] = true;
             return true;
         }
         return resul;
@@ -239,10 +239,10 @@ public class Porte {
                             nave = naves.buscarNave(Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: "));
                         } while (nave.getAlcance() < origen.distancia(destino) && nave != null);
                         if(nave != null) {
-                            salida = Utilidades.leerFecha(teclado, "Introduzca la fecha de salida: ");
+                            salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
                             if(salida != null) {
                                 do {
-                                    llegada = Utilidades.leerFecha(teclado, "Introduzaca la fecha de llegada: ");
+                                    llegada = Utilidades.leerFechaHora(teclado, "Introduzaca la fecha de llegada: ");
                                 } while (llegada.anterior(salida) && llegada != null);
                                 if(llegada != null) {
                                     precio = Utilidades.leerNumero(teclado, "Ingrese precio: ", 0, 200);
