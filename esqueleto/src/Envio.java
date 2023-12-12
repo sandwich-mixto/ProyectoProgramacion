@@ -143,6 +143,7 @@ public class Envio {
         if(precio != -1 && columna != -1 && fila != -1){
             String localizador = generarLocalizador(rand, porte.getID());
             envio = new Envio(localizador, porte, cliente, fila, columna, precio);
+            cliente.aniadirEnvio(envio);
             System.out.println("Envío " + localizador + " creado correctamente. ");
         }
         return envio;

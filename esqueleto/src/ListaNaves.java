@@ -58,12 +58,11 @@ public class ListaNaves {
         int i = 0;
         boolean encontrado = false;
         Nave resul = null;
-        if(matricula != null){
+        if(matricula != null && !matricula.equals("CANCELAR")){
             while(i < naves.length && !encontrado){
                 if(naves[i].getMatricula().equals(matricula)){
                     encontrado = true;
-                }
-                i++;
+                } else i++;
             }
             if(encontrado){
                 resul = naves[i];
@@ -92,7 +91,7 @@ public class ListaNaves {
      * @return Nave con suficiente alcance a partir de la matrícula o null.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
-        Nave nave;
+        Nave nave = null;
         do{
             nave = buscarNave(Utilidades.leerCadena(teclado, mensaje));
         } while(nave.getAlcance() < alcance && nave != null);
@@ -128,20 +127,17 @@ public class ListaNaves {
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
-        int annadidas = 0;
         Scanner sc;
         Nave nave;
         try {
             sc = new Scanner(fichero);
-            while (sc.hasNextLine() && annadidas < capacidad){
+            while (sc.hasNextLine() && !listaNaves.estaLlena()){
                 nave = new Nave(sc.nextLine().split(";")[0], sc.nextLine().split(";")[1], sc.nextLine().split(";")[2], Integer.parseInt(sc.nextLine().split(";")[3]), Integer.parseInt(sc.nextLine().split(";")[4]), Double.parseDouble(sc.nextLine().split(";")[5]));
-                if(listaNaves.insertarNave(nave)) {
-                    annadidas++;
-                }
+                listaNaves.insertarNave(nave);
             }
             sc.close();
         } catch (Exception e) {
-            return null;
+            listaNaves = null;
         } finally {
 
         }
