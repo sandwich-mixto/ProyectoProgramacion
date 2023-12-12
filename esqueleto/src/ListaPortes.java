@@ -3,7 +3,6 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 /**
  * Description of the class
- *
  * @author Carlos Gonzalez DIaz.
  * @author Jorge Jiménez Navas
  * @version     1.0
@@ -44,8 +43,7 @@ public class ListaPortes {
             if(portes[i] == null){
                 portes[i] = porte;
                 encontrado = true;
-            }
-            i++;
+            } else i++;
         }
         return encontrado;
     }
