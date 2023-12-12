@@ -1,3 +1,5 @@
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -46,7 +48,7 @@ public class ListaPuertosEspaciales {
                 puerto = lista [i].getMuelles();
             }
         }
-        return null;
+        return puerto;
     }
 
     /**
@@ -55,8 +57,12 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
-        return false;
+        boolean res = false;
+        if (!estaLlena()){
+            lista[getOcupacion()] = puertoEspacial;
+            res = true;
+        }
+        return res;
     }
 
     /**
@@ -65,8 +71,8 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-
-        return null;
+        PuertoEspacial res = null;
+        return res;
     }
 
     /**
@@ -79,8 +85,17 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
-
-
+        boolean encontrado = false;
+        String codigo = "";
+        while (!encontrado){
+            System.out.println(mensaje);
+            codigo = teclado.next();
+            puertoEspacial = buscarPuertoEspacial(codigo);
+            encontrado = puertoEspacial != null;
+            if (!encontrado){
+                System.out.println("Código de puerto no encontrado");
+            }
+        }
         return puertoEspacial;
     }
 
@@ -91,8 +106,13 @@ public class ListaPuertosEspaciales {
      */
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
+        FileWriter fw = null;
         try {
-
+            fw = new FileWriter(nombre, false);
+            pw = new PrintWriter(fw);
+            for (int i = 0; i < lista.length; i++){
+                pw.print("");
+            }
             return true;
         } catch (Exception e) {
             return false;
@@ -112,12 +132,20 @@ public class ListaPuertosEspaciales {
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         Scanner sc = null;
+        FileReader fr = null;
+        int i = 0;
+        String linea = "";
         try {
 
         } catch (Exception e) {
             return null;
         } finally {
-
+            if (sc != null){
+                sc.close();
+            }
+            if (fr != null){
+                fr.close();
+            }
         }
         return listaPuertosEspaciales;
     }
