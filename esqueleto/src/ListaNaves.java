@@ -72,11 +72,9 @@ public class ListaNaves {
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-        Nave nave;
         for(int i = 0; i < naves.length; i++){
             if(naves[i] != null){
-                nave = naves[i];
-                System.out.println(nave.getMarca() + " " + nave.getModelo() + " (" + nave.getMatricula() + ") " + nave.getFilas()* nave.getColumnas() + " contenedores, hasta " + nave.getAlcance() + " UA.");
+                System.out.println(this.getNave(i).toString());
             }
         }
     }
