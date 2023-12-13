@@ -90,6 +90,6 @@ public class Cliente {
      * @return True si el email es correcto.
      */
     public static boolean correctoEmail(String email) {
-        return  !email.split("@")[0].isEmpty() && email.split("@")[1].equals("alumnos.upm");
+        return email.matches("[A-z0-9]+@[A-z0-9]+.[A-z]+");
     }
 }
