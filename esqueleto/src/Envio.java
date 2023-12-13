@@ -83,7 +83,7 @@ public class Envio {
      */
     public boolean generarFactura(String fichero) {
         PrintWriter pw = null;
-        boolean resul = false;
+        boolean resul;
         try {
             pw = new PrintWriter(fichero);
             pw.println("-----------------------------------------------------");

@@ -182,8 +182,10 @@ public class PlanetExpress {
                         letra = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'e', 'n');
                         switch (letra){
                             case 'n':
+                                cliente = null;
                                 if(!planetExpress.maxClientesAlcanzado()){
-                                    planetExpress.insertarCliente(Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente));
+                                    cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
+                                    planetExpress.insertarCliente(cliente);
                                 } else{
                                     System.out.println("No se pueden añadir más usuarios. ");
                                 }
@@ -191,7 +193,7 @@ public class PlanetExpress {
                                 if(coincidentes != null ) {
                                     do {
                                         porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
-                                    }while (porteSeleccionado != null && !porteSeleccionado.porteLleno());
+                                    } while (porteSeleccionado != null && !porteSeleccionado.porteLleno());
                                     planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
                                 } else{
                                     System.out.println("Ningún porte reúne los requisitos de búsqueda. ");
