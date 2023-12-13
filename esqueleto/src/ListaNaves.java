@@ -72,11 +72,9 @@ public class ListaNaves {
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-        Nave nave;
         for(int i = 0; i < naves.length; i++){
             if(naves[i] != null){
-                nave = naves[i];
-                System.out.println(nave.getMarca() + " " + nave.getModelo() + " (" + nave.getMatricula() + ") " + nave.getFilas()* nave.getColumnas() + " contenedores, hasta " + nave.getAlcance() + " UA.");
+                System.out.println(this.getNave(i).toString());
             }
         }
     }
@@ -91,7 +89,7 @@ public class ListaNaves {
      * @return Nave con suficiente alcance a partir de la matrícula o null.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
-        Nave nave = null;
+        Nave nave;
         do{
             nave = buscarNave(Utilidades.leerCadena(teclado, mensaje));
         } while(nave.getAlcance() < alcance && nave != null);
@@ -103,7 +101,7 @@ public class ListaNaves {
      * @return True si consigue escribir correctamente.
      */
     public boolean escribirNavesCsv(String nombre) {
-        PrintWriter pw = null;
+        PrintWriter pw;
         try {
             pw = new PrintWriter(nombre);
             for(int i = 0; i < naves.length; i++){

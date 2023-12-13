@@ -68,7 +68,7 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        Cliente resul = null;
+        Cliente resul;
         String nombre, apellidos = "CANCELAR", email = "CANCELAR";
         nombre = Utilidades.leerCadena(teclado, "Nombre: ");
         if(!nombre.equals("CANCELAR")){
@@ -90,6 +90,6 @@ public class Cliente {
      * @return True si el email es correcto.
      */
     public static boolean correctoEmail(String email) {
-        return  !email.split("@")[0].isEmpty() && email.split("@")[1].equals("alumnos.upm");
+        return email.matches("[A-z0-9]+@[A-z0-9]+.[A-z]+");
     }
 }
