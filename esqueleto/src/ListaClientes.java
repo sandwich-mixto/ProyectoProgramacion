@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -49,7 +48,15 @@ public class ListaClientes {
     }
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
-
+        boolean encontrado = false;
+        int i = 0;
+        while ((clientes[i] != null) && !encontrado){
+            if (clientes [i].getEmail().equals(email)) {
+                encontrado = true;
+                i++;
+            }
+        }
+        return clientes [i - 1];
     }
 
     /**
@@ -62,8 +69,10 @@ public class ListaClientes {
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
         Cliente cliente = null;
-
-
+        do {
+            System.out.println(mensaje);
+            cliente = buscarClienteEmail(teclado.nextLine());
+        } while (cliente.getEmail().equals(buscarClienteEmail(teclado.nextLine())));
         return cliente;
     }
 
@@ -74,18 +83,31 @@ public class ListaClientes {
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
-
-
+        PrintWriter pw = null;
+        FileWriter fw = null;
         try {
-
-
-
+            fw = new FileWriter(fichero, false);
+            pw = new PrintWriter(fw);
+            for (int i = 0; i < clientes.length; i++){
+                pw.println(clientes[i].getNombre() + ";" + clientes[i].getApellidos() + ";" + clientes[i].getEmail());
+            }
+            return true;
         } catch (FileNotFoundException e) {
             return false;
+        } catch (IOException e) {
+            return false;
         } finally {
-
+            if (pw != null) {
+                pw.close();
+            }
+            if (fw != null) {
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    return false;
+                }
+            }
         }
-        return true;
     }
 
     /**
@@ -97,13 +119,34 @@ public class ListaClientes {
      * @return lista de clientes
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
-
+        ListaClientes listaClientes = new ListaClientes(capacidad);
+        Scanner sc = null;
+        FileReader fr = null;
+        int i = 0;
+        String linea = "";
+        Cliente cliente;
         try {
+            fr = new FileReader(fichero);
+            sc = new Scanner(fr);
+            sc.useDelimiter("; | \n");
+            while (i < capacidad && sc.hasNext()){
+                cliente = new Cliente(sc.next(), sc.next(), sc.next(), sc.nextInt());
+                listaClientes.insertarCliente(cliente);
+            }
 
         } catch (FileNotFoundException e) {
             return null;
         } finally {
-
+            if (sc != null){
+                sc.close();
+            }
+            if (fr != null){
+                try{
+                    fr.close();
+                } catch (IOException e ){
+                    return null;
+                }
+            }
         }
         return listaClientes;
     }

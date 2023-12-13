@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -81,12 +78,20 @@ public class ListaEnvios {
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         int x = 0;
-        boolean encontrado = false;
-        while ((x < envios.length) && !encontrado){
+        boolean encontrado1 = false;
+        boolean encontrado2 = false;
+        while ((fila < envios.length) && !encontrado1){
                 if (envios [x].getPorte().toString().equals(idPorte)){
-                    encontrado = true;
+                    encontrado1 = true;
                 }
                 x++;
+                if (encontrado1){
+                    while ((fila < envios [x].getFila() && columna < envios [x].getColumna()) && !encontrado2){
+                        if (envios [x].getPorte().buscarEnvio(fila, columna) != null){
+                            encontrado2 = true;
+                        }
+                    }
+                }
             }
             return envios[x];
         }
@@ -118,7 +123,11 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-
+        int i = 0;
+        while (envios[i] != null){
+            System.out.println(envios[i].toString());
+            i++;
+        }
     }
 
     /**
@@ -145,13 +154,27 @@ public class ListaEnvios {
      */
     public boolean aniadirEnviosCsv(String fichero) {
         PrintWriter pw = null;
+        FileWriter fw = null;
         try {
-
+            fw = new FileWriter(fichero, true);
+            pw = new PrintWriter(fw);
+            for (int i = 0; i < envios.length; i++){
+                listarEnvios();
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            if (pw != null){
+                pw.close();
+            }
+            if (fw != null){
+                try {
+                    fw.close();
+                }catch (IOException e){
+                    return false;
+                }
+            }
         }
     }
 
@@ -163,7 +186,15 @@ public class ListaEnvios {
      */
     public static void leerEnviosCsv(String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
         Scanner sc = null;
+        FileWriter fr = null;
+        int i = 0;
+        String linera = "";
+        Envio envio;
         try {
+            fr = new FileWriter(ficheroEnvios);
+            sc = new Scanner(String.valueOf(fr));
+            sc.useDelimiter("; | \n");
+            envio = new Envio(sc.next(), portes.escribirPortesCsv(ficheroEnvios), clientes.escribirClientesCsv(ficheroEnvios), sc.nextInt(), sc.nextInt(), sc.nextInt())
 
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero de envíos" + e.getMessage());

@@ -138,7 +138,7 @@ public class ListaPuertosEspaciales {
                     return false;
                 } catch (IOException e) {
                     return false;
-                }
+                }sc.next()
             }
         }
     }
