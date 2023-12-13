@@ -68,7 +68,7 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        Cliente resul = null;
+        Cliente resul;
         String nombre, apellidos = "CANCELAR", email = "CANCELAR";
         nombre = Utilidades.leerCadena(teclado, "Nombre: ");
         if(!nombre.equals("CANCELAR")){

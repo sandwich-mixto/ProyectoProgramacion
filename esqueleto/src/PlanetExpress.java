@@ -146,7 +146,7 @@ public class PlanetExpress {
      * y concluirá la ejecución del mismo: `Número de argumentos incorrecto`.
      */
     public static void main(String[] args) {
-        char letra = ' ';
+        char letra;
         String email, porte, fichero;
         Cliente cliente;
         Envio envio;

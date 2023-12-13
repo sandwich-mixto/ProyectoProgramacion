@@ -82,7 +82,7 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
-        PrintWriter pw = null;
+        PrintWriter pw;
         boolean resul;
         try {
             pw = new PrintWriter(fichero);

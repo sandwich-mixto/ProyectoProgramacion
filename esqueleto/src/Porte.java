@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -185,6 +186,10 @@ public class Porte {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fichero);
+            for(int i = 0 ; i < listaEnvios.getOcupacion(); i++){
+                pw.println(listaEnvios.getEnvio(i).toString());
+            }
+            pw.close();
             return true;
         } catch (FileNotFoundException e) {
             return false;
