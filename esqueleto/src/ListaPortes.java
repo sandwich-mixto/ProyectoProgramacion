@@ -106,8 +106,8 @@ public class ListaPortes {
         String cadena;
         do {
             cadena = Utilidades.leerCadena(teclado, mensaje);
-        }while (cadena != null && !cadena.equals(cancelar));
-        if(cadena != null){
+        }while (!cadena.equals(cancelar) && buscarPorte(cadena) == null);
+        if(!cadena.equals(cancelar)){
             porte = buscarPorte(cadena);
         }
         return porte;
