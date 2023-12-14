@@ -22,16 +22,17 @@ public class Utilidades {
 
         String numero;
         numero = teclado.nextLine();
+        int num;
         if (numero.equals("CANCELAR")){
             return -1;
         } else {
             if (numero.length() > 1) {
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            int num = Integer.parseInt(numero);
+            num = Integer.parseInt(numero);
             if (num < minimo || num > maximo) {
                 System.out.println(mensaje);
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
             return num;
         }
@@ -48,16 +49,17 @@ public class Utilidades {
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         String numero;
         numero = teclado.nextLine();
+        long num;
         if (numero.equals("CANCELAR")){
             return -1;
         } else {
             if (numero.length() > 1) {
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            long num = Long.parseLong(numero);
+            num = Long.parseLong(numero);
             if (num < minimo || num > maximo) {
                 System.out.println(mensaje);
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
             return num;
         }
@@ -74,16 +76,17 @@ public class Utilidades {
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         String numero;
         numero = teclado.nextLine();
+        double num;
         if (numero.equals("CANCELAR")){
             return -1;
         } else {
             if (numero.length() > 1) {
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            double num = Double.parseDouble(numero);
+            num = Double.parseDouble(numero);
             if (num < minimo || num > maximo) {
                 System.out.println(mensaje);
-                leerNumero(teclado, mensaje, minimo, maximo);
+                num = leerNumero(teclado, mensaje, minimo, maximo);
             }
             return num;
         }
@@ -102,7 +105,7 @@ public class Utilidades {
         letra = teclado.next().charAt(0);
         if (letra < minimo || letra > maximo){
             System.out.println(mensaje);
-            leerLetra(teclado, mensaje, minimo, maximo);
+            letra = leerLetra(teclado, mensaje, minimo, maximo);
         }
         return letra;
     }
