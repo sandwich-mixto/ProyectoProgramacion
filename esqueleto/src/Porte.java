@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -116,7 +115,7 @@ public class Porte {
         boolean resul = false;
         if(!this.huecoOcupado(envio.getFila(), envio.getColumna())){
             huecos[envio.getFila()][envio.getColumna()] = true;
-            return true;
+            resul = listaEnvios.insertarEnvio(envio);
         }
         return resul;
     }
@@ -129,7 +128,7 @@ public class Porte {
         boolean resul = false;
         if(huecos[listaEnvios.buscarEnvio(localizador).getFila()][listaEnvios.buscarEnvio(localizador).getColumna()]){
             huecos[listaEnvios.buscarEnvio(localizador).getFila()][listaEnvios.buscarEnvio(localizador).getColumna()] = false;
-            resul = true;
+            resul = listaEnvios.eliminarEnvio(localizador);
         }
         return resul;
     }

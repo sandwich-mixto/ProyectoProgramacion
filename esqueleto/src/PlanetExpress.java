@@ -86,16 +86,16 @@ public class PlanetExpress {
      */
     public ListaPortes buscarPorte(Scanner teclado) {
         ListaPortes resul = null;
-        String codigoOrigen, codigoDestino = null;
+        String codigoOrigen, codigoDestino = "CANCELAR";
         Fecha fecha = null;
         codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código del puerto de origen: ");
-        if(codigoOrigen != null){
+        if(!codigoOrigen.equals("CANCELAR")){
             codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código del puerto de destino: ");
-            if(codigoDestino != null){
+            if(!codigoDestino.equals("CANCELAR")){
                 fecha = Utilidades.leerFecha(teclado, "Fecha de salida: ");
             }
         }
-        if (fecha != null && codigoDestino != null && codigoOrigen != null) {
+        if (fecha != null && !codigoDestino.equals("CANCELAR") && !codigoOrigen.equals("CANCELAR")) {
             resul = listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
         }
         return resul;
@@ -147,10 +147,11 @@ public class PlanetExpress {
      */
     public static void main(String[] args) {
         char letra;
-        String email, porte, fichero;
+        String email, fichero;
         Cliente cliente;
         Envio envio;
         ListaPortes coincidentes;
+        Porte porteSeleccionado;
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
             return;
@@ -176,13 +177,11 @@ public class PlanetExpress {
                     }
                     break;
                 case 3:     // TODO: Buscar Porte
-                    Porte porteSeleccionado;
-                    coincidentes =  planetExpress.buscarPorte(teclado);
+                    coincidentes = planetExpress.buscarPorte(teclado);
                     do{
                         letra = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'e', 'n');
                         switch (letra){
                             case 'n':
-                                cliente = null;
                                 if(!planetExpress.maxClientesAlcanzado()){
                                     cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
                                     planetExpress.insertarCliente(cliente);
@@ -230,14 +229,11 @@ public class PlanetExpress {
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
-                    planetExpress.listaPortes.listarPortes();
-                    do {
-                        porte = Utilidades.leerCadena(teclado, "Seleccione un porte: ");
-                    }while (!porte.equals("CANCELAR") && planetExpress.listaPortes.buscarPorte(porte) != null);
-                    if(!porte.equals("CANCELAR")){
+                    porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "CANCELAR");
+                    if(porteSeleccionado != null){
                         do {
                             fichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        }while (!fichero.equals("CANCELAR") && !planetExpress.listaPortes.buscarPorte(porte).generarListaEnvios(fichero));
+                        }while (!fichero.equals("CANCELAR") && !porteSeleccionado.generarListaEnvios(fichero));
                     }
                     break;
             }
