@@ -147,7 +147,7 @@ public class PlanetExpress {
      */
     public static void main(String[] args) {
         char letra;
-        String email, porte, fichero;
+        String email, fichero;
         Cliente cliente;
         Envio envio;
         ListaPortes coincidentes;
@@ -177,7 +177,6 @@ public class PlanetExpress {
                     }
                     break;
                 case 3:     // TODO: Buscar Porte
-                    cliente = null;
                     coincidentes = planetExpress.buscarPorte(teclado);
                     do{
                         letra = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'e', 'n');
