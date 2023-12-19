@@ -14,7 +14,7 @@ public class ListaClientes {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad capacidad del array de clientes
      */
     public ListaClientes(int capacidad) {
         this.clientes = new Cliente[capacidad];
@@ -63,9 +63,9 @@ public class ListaClientes {
      * TODO: Método para seleccionar un Cliente existente a partir de su email, usando el mensaje pasado como argumento
      *  para la solicitud y, siguiendo el orden y los textos mostrados en el enunciado.
      *  La función debe solicitar repetidamente hasta que se introduzca un email correcto
-     * @param teclado
-     * @param mensaje
-     * @return
+     * @param teclado entrada principal por teclado
+     * @param mensaje salida principal impresa por pantalla
+     * @return cliente selecionado
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
         Cliente cliente = null;
@@ -79,7 +79,7 @@ public class ListaClientes {
     /**
      * TODO: Método para guardar la lista de clientes en un fichero .csv, sobreescribiendo la información del mismo
      *  fichero
-     * @param fichero
+     * @param fichero fichero que se le pasa al metodo por parametro
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
@@ -113,9 +113,9 @@ public class ListaClientes {
     /**
      * TODO: Genera una lista de Clientes a partir del fichero CSV, usando los límites especificados como argumentos
      *  para la capacidad de la lista y el número de billetes máximo por pasajero
-     * @param fichero
-     * @param capacidad
-     * @param maxEnviosPorCliente
+     * @param fichero fichero que se le pasa al metodo por parametro
+     * @param capacidad delimita la capacidad de la lista
+     * @param maxEnviosPorCliente cantidad maxima permitida por cliente
      * @return lista de clientes
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
@@ -123,7 +123,6 @@ public class ListaClientes {
         Scanner sc = null;
         FileReader fr = null;
         int i = 0;
-        String linea = "";
         Cliente cliente;
         try {
             fr = new FileReader(fichero);

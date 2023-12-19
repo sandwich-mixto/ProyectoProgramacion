@@ -69,9 +69,9 @@ public class Utilidades {
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
      * @param teclado Entrada estandar
      * @param mensaje Mensaje que se muestra al usuario por pantalla
-     * @param minimo Valor
-     * @param maximo
-     * @return double numero
+     * @param minimo Valor minimo que puede tomar el numero
+     * @param maximo Valor maximo que puede tomar el numero
+     * @return double numero Valor del numero que devuelve en caso de que sea correcto
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         String numero;
@@ -94,11 +94,11 @@ public class Utilidades {
 
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
-     * @param minimo
-     * @param maximo
-     * @return char letra
+     * @param teclado Entrada estandar
+     * @param mensaje Mensaje que se muestra al usuario por pantalla
+     * @param minimo Valor minimo que puede tomar el numero
+     * @param maximo Valor maximo que puede tomar el numero
+     * @return char letra Devuelve la letra que ha leido en caso de que sea correcta
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
@@ -113,9 +113,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado Entrada estandar
+     * @param mensaje Mensaje que se muestra por pantalla al usuario
+     * @return Fecha Devuelve la fecha que ga leido en caso de que sea correcta
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
@@ -158,9 +158,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado Entrada estandar
+     * @param mensaje Mensaje que se muestra por pantalla al usuario
+     * @return Fecha Devuelve la fecha que ha leido en caso de que sea correcta
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
@@ -235,9 +235,9 @@ public class Utilidades {
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
-     * @param teclado
-     * @param s
-     * @return
+     * @param teclado Entrada estandar
+     * @param s Cadena que queremos leer
+     * @return Devuelve la cadena leida
      */
     public static String leerCadena(Scanner teclado, String s) {
         System.out.print(s);

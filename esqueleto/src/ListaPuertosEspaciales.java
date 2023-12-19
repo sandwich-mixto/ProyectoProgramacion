@@ -121,7 +121,7 @@ public class ListaPuertosEspaciales {
                     fw.close();
                 } catch (IOException e) {
                     return false;
-                }sc.next()
+                }
             }
         }
     }
