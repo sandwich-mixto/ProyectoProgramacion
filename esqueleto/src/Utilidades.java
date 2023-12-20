@@ -24,7 +24,7 @@ public class Utilidades {
         numero = teclado.nextLine();
         int num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -34,8 +34,8 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Utilidades {
         numero = teclado.nextLine();
         long num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -61,8 +61,8 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Utilidades {
         numero = teclado.nextLine();
         double num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -88,8 +88,8 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**

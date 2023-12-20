@@ -149,8 +149,8 @@ public class ListaEnvios {
 
     /**
      * TODO: Añade los Envios al final de un fichero CSV, SIN SOBREESCRIBIR la información
-     * @param fichero fichero en el que escribimos la informacion
-     * @return
+     * @param fichero fichero en el que escribimos la informacion.
+     * @return fichero con los envios añadidos.
      */
     public boolean aniadirEnviosCsv(String fichero) {
         PrintWriter pw = null;
