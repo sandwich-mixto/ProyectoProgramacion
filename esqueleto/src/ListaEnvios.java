@@ -13,7 +13,7 @@ public class ListaEnvios {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad capacidad del array de envios
+     * @param capacidad capacidad del array de envíos.
      */
     public ListaEnvios(int capacidad) {
         this.envios = new Envio[capacidad];
@@ -40,8 +40,8 @@ public class ListaEnvios {
 
     /**
      * TODO: insertamos un nuevo envío en la lista
-     * @param envio envio que queremos insertar en la lista
-     * @return true en caso de que se añada correctamente, false en caso de lista llena o error
+     * @param envio envio que queremos insertar en la lista.
+     * @return true en caso de que se añada correctamente, false en caso de lista llena o error.
      */
     public boolean insertarEnvio(Envio envio) {
         int posicion = 0;
@@ -54,8 +54,8 @@ public class ListaEnvios {
 
     /**
      * TODO: Buscamos el envio a partir del localizador pasado como parámetro
-     * @param localizador localizador del envio que buscamos
-     * @return el envio que encontramos o null si no existe
+     * @param localizador localizador del envío que buscamos.
+     * @return el envío que encontramos o null si no existe.
      */
     public Envio buscarEnvio(String localizador) {
         int i = 0;
@@ -71,10 +71,10 @@ public class ListaEnvios {
 
     /**
      * TODO: Buscamos el envio a partir del idPorte, fila y columna pasados como parámetros
-     * @param idPorte el id del porte del envio que buscamos
-     * @param fila fila en la que se encuentra el envio que buscamos
-     * @param columna columna en la que se encuentra el envio que buscamos
-     * @return el envio que encontramos o null si no existe
+     * @param idPorte el id del porte del envío que buscamos.
+     * @param fila fila en la que se encuentra el envío que buscamos.
+     * @param columna columna en la que se encuentra el envío que buscamos.
+     * @return el envío que encontramos o null si no existe.
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         int x = 0;
@@ -98,8 +98,8 @@ public class ListaEnvios {
 
     /**
      * TODO: Eliminamos un envio a través del localizador pasado por parámetro
-     * @param localizador localizador del envio que queremos eliminar
-     * @return True si se ha borrado correctamente, false en cualquier otro caso
+     * @param localizador localizador del envío que queremos eliminar.
+     * @return True si se ha borrado correctamente, false en cualquier otro caso.
      */
     public boolean eliminarEnvio (String localizador) {
         int i = 0;
@@ -134,9 +134,9 @@ public class ListaEnvios {
      * TODO: Permite seleccionar un Envio existente a partir de su localizador, usando el mensaje pasado como argumento
      *  para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente hasta que se introduzca un localizador correcto
-     * @param teclado entrada principal por teclado
-     * @param mensaje salida principal que se muestra por pantalla
-     * @return devuelve el envio seleccionado en caso de que exista
+     * @param teclado entrada principal por teclado.
+     * @param mensaje salida principal que se muestra por pantalla.
+     * @return devuelve el envío seleccionado en caso de que exista.
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         Envio envio = null;
@@ -150,7 +150,7 @@ public class ListaEnvios {
     /**
      * TODO: Añade los Envios al final de un fichero CSV, SIN SOBREESCRIBIR la información
      * @param fichero fichero en el que escribimos la informacion.
-     * @return fichero con los envios añadidos.
+     * @return fichero con los envíos añadidos.
      */
     public boolean aniadirEnviosCsv(String fichero) {
         PrintWriter pw = null;
@@ -180,9 +180,9 @@ public class ListaEnvios {
 
     /**
      * TODO: Lee los Envios del fichero CSV y los añade a las listas de sus respectivos Portes y Clientes
-     * @param ficheroEnvios lista de envios del fichero CSV
-     * @param portes lista de portes
-     * @param clientes lista de clientes
+     * @param ficheroEnvios lista de envíos del fichero CSV.
+     * @param portes lista de portes.
+     * @param clientes lista de clientes.
      */
     public static void leerEnviosCsv(String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
         Scanner sc = null;

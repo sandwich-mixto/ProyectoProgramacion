@@ -14,7 +14,7 @@ public class ListaClientes {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad capacidad del array de clientes
+     * @param capacidad capacidad del array de clientes.
      */
     public ListaClientes(int capacidad) {
         this.clientes = new Cliente[capacidad];
@@ -79,7 +79,7 @@ public class ListaClientes {
     /**
      * TODO: Método para guardar la lista de clientes en un fichero .csv, sobreescribiendo la información del mismo
      *  fichero
-     * @param fichero fichero que se le pasa al metodo por parametro.
+     * @param fichero fichero que se le pasa al método por parámetro.
      * @return fichero editado.
      */
     public boolean escribirClientesCsv(String fichero) {
@@ -102,10 +102,10 @@ public class ListaClientes {
     /**
      * TODO: Genera una lista de Clientes a partir del fichero CSV, usando los límites especificados como argumentos
      *  para la capacidad de la lista y el número de billetes máximo por pasajero
-     * @param fichero fichero que se le pasa al metodo por parametro
-     * @param capacidad delimita la capacidad de la lista
-     * @param maxEnviosPorCliente cantidad maxima permitida por cliente
-     * @return lista de clientes
+     * @param fichero fichero que se le pasa al método por parámetro.
+     * @param capacidad delimita la capacidad de la lista.
+     * @param maxEnviosPorCliente cantidad máxima permitida por cliente.
+     * @return lista de clientes.
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
         ListaClientes listaClientes = new ListaClientes(capacidad);
