@@ -113,8 +113,6 @@ public class ListaNaves {
             return true;
         } catch (Exception e) {
             return false;
-        } finally {
-
         }
     }
     /**
@@ -136,8 +134,6 @@ public class ListaNaves {
             sc.close();
         } catch (Exception e) {
             listaNaves = null;
-        } finally {
-
         }
         return listaNaves;
     }

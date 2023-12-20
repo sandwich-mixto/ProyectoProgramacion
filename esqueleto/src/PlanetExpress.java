@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -238,5 +239,6 @@ public class PlanetExpress {
                     break;
             }
         } while (opcion != 0);
+        planetExpress.guardarDatos(args[5], args[6], args[7], args[8], args[9]);
     }
 }

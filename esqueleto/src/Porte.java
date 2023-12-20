@@ -85,11 +85,7 @@ public class Porte {
         }
         return libres;
     }
-    /**
-     * TODO: ¿Están llenos todos los huecos?
-     *
-     * @return True si no quedan huecos.
-     */
+    // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
         return numHuecosLibres() == 0;
     }
