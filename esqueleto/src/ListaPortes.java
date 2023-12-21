@@ -167,7 +167,6 @@ public class ListaPortes {
             listaPortes = new ListaPortes(capacidad);
             System.out.println("Error en la lectura del fichero " + fichero);
         }
-        System.out.println(listaPortes == null);
         return listaPortes;
     }
 }

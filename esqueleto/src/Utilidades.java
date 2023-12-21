@@ -110,38 +110,19 @@ public class Utilidades {
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
         Fecha fecha = null;
-
-        String dia1;
-        System.out.print("Ingrese día: ");
-        dia1 = teclado.nextLine();
-        if (dia1.equals("CANCELAR")){
-            leerFecha(teclado, mensaje);
-        }
-        int dia = Integer.parseInt(dia1);
-
-        String mes1;
-        System.out.print("Ingrese mes: ");
-        mes1 = teclado.nextLine();
-        if (mes1.equals("CANCELAR")){
-            leerFecha(teclado, mensaje);
-        }
-        int mes = Integer.parseInt(mes1);
-
-        String anio1;
-        System.out.print("Ingrese año: ");
-        anio1 = teclado.nextLine();
-        if (anio1.equals("CANCELAR")){
-            leerFecha(teclado, mensaje);
-        }
-        int anio = Integer.parseInt(anio1);
-
-
-        fecha = new Fecha(dia, mes, anio);
-
-        if (!Fecha.comprobarFecha(dia, mes, anio)){
-            fecha = leerFecha(teclado, mensaje);
-        }
-
+        int dia, mes = -1, anio = -1;
+        do {
+            dia = leerNumero(teclado, "Introduzca el día: ", 1, 31);
+            if(dia != -1) {
+                mes = leerNumero(teclado, "Introduzca el mes: ", 1, 12);
+                if(mes != -1) {
+                    anio = leerNumero(teclado, "Introduzca el año: ", Fecha.PRIMER_ANIO, Fecha.ULTIMO_ANIO);
+                }
+            }
+        }while (!Fecha.comprobarFecha(dia, mes, anio));
+        if (anio != -1 && mes != -1 && dia != -1 && !Fecha.comprobarFecha(dia, mes, anio)) {
+            fecha = leerFechaHora(teclado, "Fecha incorrecta.\n" + mensaje);
+        } else fecha = new Fecha(dia, mes, anio);
         return fecha;
     }
 
@@ -155,74 +136,30 @@ public class Utilidades {
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
         Fecha fecha = null;
-        int dia;
+        int dia, mes = -1, anio = -1, hora = -1, minuto = -1, segundo = -1;
         do {
-            System.out.print("Ingrese día: ");
-            dia = teclado.nextInt();
-        } while (dia <= 1 || dia >= 31);
-
-        int mes = 0;
-        if (dia >= 28) {
-            do {
-                System.out.print("Ingrese mes: ");
-                mes = teclado.nextInt();
-            } while (mes == 2);
-            if (dia == 31) {
-                do {
-                    System.out.print("Ingrese mes: ");
-                    mes = teclado.nextInt();
-                } while (mes != 1 || mes != 3 || mes != 5 || mes != 7 || mes != 8 || mes != 10 || mes != 12);
-            } else {
-                do {
-                    System.out.print("Ingrese mes: ");
-                    mes = teclado.nextInt();
-                } while (mes != 4 || mes != 6 || mes != 9 || mes != 11);
-            }
-        }
-
-            int anio;
-            do {
-                System.out.print("Ingrese año: ");
-                anio = teclado.nextInt();
-            } while (anio <= Fecha.PRIMER_ANIO || anio >= Fecha.ULTIMO_ANIO);
-
-            if (!Fecha.esBisiesto(anio)) {
-                if (mes == 2) {
-                    if (dia == 29) {
-                        do {
-                            System.out.println("Fecha incorrecta");
-                            System.out.print("Ingrese año bisiesto: ");
-                            anio = leerNumero(teclado, "Introduzca año: ", 1900, 3000);
-                        } while (!Fecha.esBisiesto(anio));
+            dia = leerNumero(teclado, "Introduzca el día: ", 1, 31);
+            if(dia != -1) {
+                mes = leerNumero(teclado, "Introduzca el mes: ", 1, 12);
+                if (mes != -1) {
+                    anio = leerNumero(teclado, "Introduzca el año: ", Fecha.PRIMER_ANIO, Fecha.ULTIMO_ANIO);
+                    if(anio != -1) {
+                        hora = leerNumero(teclado, "Introduzca hora: ", 0, Fecha.HORAS_DIA);
+                        if(hora != -1) {
+                            minuto = leerNumero(teclado, "Introduzca minuto: ", 0, Fecha.MINUTOS_HORA);
+                            if(minuto != -1) {
+                                segundo = leerNumero(teclado, "Introduzca segundo: ", 0, Fecha.SEGUNDOS_MINUTO);
+                            }
+                        }
                     }
                 }
             }
-
-            int hora;
-            do {
-                System.out.print("Ingrese hora: ");
-                hora = teclado.nextInt();
-            } while (hora <= 0 || hora >= Fecha.HORAS_DIA);
-
-            int minuto;
-            do {
-                System.out.print("Ingrese minuto: ");
-                minuto = teclado.nextInt();
-            } while (minuto <= 0 || minuto >= Fecha.MINUTOS_HORA);
-
-            int segundo;
-            do {
-                System.out.print("Ingrese segundo: ");
-                segundo = teclado.nextInt();
-            } while (segundo <= 0 || segundo >= Fecha.SEGUNDOS_MINUTO);
-
-            fecha = new Fecha(dia, mes, anio, hora, minuto, segundo);
-            if ((!Fecha.comprobarFecha(dia, mes, anio)) || (!Fecha.comprobarHora(hora, minuto, segundo))) {
-                fecha = leerFechaHora(teclado, "Fecha incorrecta.");
-            }
-            return new Fecha(dia, mes, anio, hora, minuto, segundo);
+        }while (!Fecha.comprobarFecha(dia, mes, anio) || !Fecha.comprobarHora(hora, minuto, segundo));
+        if (dia != -1 && mes != -1 && anio != -1 && hora != -1 && minuto != -1 && segundo != -1 && (!Fecha.comprobarFecha(dia, mes, anio) || !Fecha.comprobarHora(hora, minuto, segundo))) {
+            fecha = leerFechaHora(teclado, "Fecha incorrecta.\n" + mensaje);
+        } else {fecha = new Fecha(dia, mes, anio);}
+        return fecha;
     }
-
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
      * @param teclado Entrada estandar.
@@ -230,11 +167,7 @@ public class Utilidades {
      * @return Devuelve la cadena leida.
      */
     public static String leerCadena(Scanner teclado, String s) {
-        if (s.equals("")){
-            leerCadena(teclado, s);
-        }
         System.out.print(s);
-        s = teclado.nextLine();
-        return s;
+        return teclado.nextLine();
     }
 }
