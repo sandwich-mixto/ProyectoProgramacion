@@ -158,7 +158,7 @@ public class ListaPortes {
             }
             sc.close();
         } catch (Exception e) {
-            return null;
+            listaPortes = new ListaPortes(capacidad);
         }
         return listaPortes;
     }

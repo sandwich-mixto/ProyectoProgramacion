@@ -121,7 +121,7 @@ public class ListaClientes {
             sc.close();
 
         } catch (Exception e) {
-            listaClientes = null;
+            listaClientes = new ListaClientes(capacidad);
         }
         return listaClientes;
     }
