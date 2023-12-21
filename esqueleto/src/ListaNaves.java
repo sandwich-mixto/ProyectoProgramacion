@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 /**
@@ -104,7 +105,7 @@ public class ListaNaves {
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw;
         try {
-            pw = new PrintWriter(new File(nombre));
+            pw = new PrintWriter(nombre);
             for(int i = 0; i < naves.length; i++){
                 if(naves[i] != null){
                     pw.println(naves[i].getMarca() + ";" + naves[i].getModelo() + ";" + naves[i].getMatricula() + ";" + naves[i].getFilas() + ";" + naves[i].getColumnas() + ";" + naves[i].getAlcance());
@@ -124,17 +125,24 @@ public class ListaNaves {
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
-        Scanner sc;
+        Scanner entrada;
+        String linea;
         Nave nave;
         try {
-            sc = new Scanner(new File(fichero));
-            while (sc.hasNextLine() && !listaNaves.estaLlena()){
-                nave = new Nave(sc.nextLine().split(";")[0], sc.nextLine().split(";")[1], sc.nextLine().split(";")[2], Integer.parseInt(sc.nextLine().split(";")[3]), Integer.parseInt(sc.nextLine().split(";")[4]), Double.parseDouble(sc.nextLine().split(";")[5]));
+            entrada = new Scanner(new File(fichero));
+            while (entrada.hasNextLine() && !listaNaves.estaLlena()){
+                linea = entrada.nextLine();
+                nave = new Nave(linea.split(";")[0], linea.split(";")[1], linea.split(";")[2], Integer.parseInt(linea.split(";")[3]), Integer.parseInt(linea.split(";")[4]), Double.parseDouble(linea.split(";")[5]));
                 listaNaves.insertarNave(nave);
             }
-            sc.close();
-        } catch (Exception e) {
+            entrada.close();
+        }catch (FileNotFoundException e){
             listaNaves = new ListaNaves(capacidad);
+            System.out.println("Fichero " + fichero  +" no encontrado. ");
+        }
+        catch (Exception e) {
+            listaNaves = new ListaNaves(capacidad);
+            System.out.println("Error en la lectura de " + fichero);
         }
         return listaNaves;
     }
