@@ -195,7 +195,6 @@ public class PlanetExpress {
                                         porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
                                     } while (porteSeleccionado != null && porteSeleccionado.porteLleno());
                                     planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
-                                    System.out.println("Patata. ");
                                 } else{
                                     System.out.println("Ningún porte reúne los requisitos de búsqueda. ");
                                 }
