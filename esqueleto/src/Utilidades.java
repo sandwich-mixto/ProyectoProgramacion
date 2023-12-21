@@ -230,6 +230,9 @@ public class Utilidades {
      * @return Devuelve la cadena leida.
      */
     public static String leerCadena(Scanner teclado, String s) {
+        if (s.equals("")){
+            leerCadena(teclado, s);
+        }
         System.out.print(s);
         s = teclado.nextLine();
         return s;
