@@ -19,7 +19,7 @@ public class Utilidades {
      * @return int número Valor del número que devuelve en caso de que sea correcto.
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
-
+        System.out.println(mensaje);
         String numero;
         numero = teclado.nextLine();
         int num;
@@ -31,7 +31,6 @@ public class Utilidades {
             }
             num = Integer.parseInt(numero);
             if (num < minimo || num > maximo) {
-                System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
         }
@@ -47,6 +46,7 @@ public class Utilidades {
      * @return long número Valor del número que devuelve en caso de que sea correcto.
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
+        System.out.println(mensaje);
         String numero;
         numero = teclado.nextLine();
         long num;
@@ -58,7 +58,6 @@ public class Utilidades {
             }
             num = Long.parseLong(numero);
             if (num < minimo || num > maximo) {
-                System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
         }
@@ -74,6 +73,7 @@ public class Utilidades {
      * @return double número Valor del número que devuelve en caso de que sea correcto.
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
+        System.out.println(mensaje);
         String numero;
         numero = teclado.nextLine();
         double num;
@@ -85,7 +85,6 @@ public class Utilidades {
             }
             num = Double.parseDouble(numero);
             if (num < minimo || num > maximo) {
-                System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
         }
@@ -101,10 +100,10 @@ public class Utilidades {
      * @return char letra Devuelve la letra que ha leido en caso de que sea correcta.
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
+        System.out.println(mensaje);
         char letra;
         letra = teclado.next().charAt(0);
         if (letra < minimo || letra > maximo){
-            System.out.println(mensaje);
             letra = leerLetra(teclado, mensaje, minimo, maximo);
         }
         return letra;
@@ -169,24 +168,24 @@ public class Utilidades {
         do {
             System.out.print("Ingrese día: ");
             dia = teclado.nextInt();
-        } while (dia >= 1 && dia <= 31);
+        } while (dia <= 1 || dia >= 31);
 
         int mes = 0;
         if (dia >= 28) {
             do {
                 System.out.print("Ingrese mes: ");
                 mes = teclado.nextInt();
-            } while (mes != 2);
+            } while (mes == 2);
             if (dia == 31) {
                 do {
                     System.out.print("Ingrese mes: ");
                     mes = teclado.nextInt();
-                } while (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12);
+                } while (mes != 1 || mes != 3 || mes != 5 || mes != 7 || mes != 8 || mes != 10 || mes != 12);
             } else {
                 do {
                     System.out.print("Ingrese mes: ");
                     mes = teclado.nextInt();
-                } while (mes == 4 || mes == 6 || mes == 9 || mes == 11);
+                } while (mes != 4 || mes != 6 || mes != 9 || mes != 11);
             }
         }
 
@@ -194,7 +193,7 @@ public class Utilidades {
             do {
                 System.out.print("Ingrese año: ");
                 anio = teclado.nextInt();
-            } while (anio >= Fecha.PRIMER_ANIO && anio <= Fecha.ULTIMO_ANIO);
+            } while (anio <= Fecha.PRIMER_ANIO || anio >= Fecha.ULTIMO_ANIO);
 
             if (!Fecha.esBisiesto(anio)) {
                 if (mes == 2) {
@@ -203,7 +202,7 @@ public class Utilidades {
                             System.out.println("Fecha incorrecta");
                             System.out.print("Ingrese año bisiesto: ");
                             anio = leerNumero(teclado, "Introduzca año: ", 1900, 3000);
-                        } while (Fecha.esBisiesto(anio));
+                        } while (!Fecha.esBisiesto(anio));
                     }
                 }
             }
@@ -212,19 +211,19 @@ public class Utilidades {
             do {
                 System.out.print("Ingrese hora: ");
                 hora = teclado.nextInt();
-            } while (hora >= 0 && hora <= Fecha.HORAS_DIA);
+            } while (hora <= 0 || hora >= Fecha.HORAS_DIA);
 
             int minuto;
             do {
                 System.out.print("Ingrese minuto: ");
                 minuto = teclado.nextInt();
-            } while (minuto >= 0 && minuto <= Fecha.MINUTOS_HORA);
+            } while (minuto <= 0 || minuto >= Fecha.MINUTOS_HORA);
 
             int segundo;
             do {
                 System.out.print("Ingrese segundo: ");
                 segundo = teclado.nextInt();
-            } while (segundo >= 0 && segundo <= Fecha.SEGUNDOS_MINUTO);
+            } while (segundo <= 0 || segundo >= Fecha.SEGUNDOS_MINUTO);
 
             fecha = new Fecha(dia, mes, anio, hora, minuto, segundo);
             if ((!Fecha.comprobarFecha(dia, mes, anio)) || (!Fecha.comprobarHora(hora, minuto, segundo))) {
