@@ -26,9 +26,6 @@ public class Utilidades {
         if (numero.equals("CANCELAR")){
             num = -1;
         } else {
-            if (numero.length() > 1) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
             num = Integer.parseInt(numero);
             if (num < minimo || num > maximo) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -53,9 +50,6 @@ public class Utilidades {
         if (numero.equals("CANCELAR")){
             num = -1;
         } else {
-            if (numero.length() > 1) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
             num = Long.parseLong(numero);
             if (num < minimo || num > maximo) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -80,9 +74,6 @@ public class Utilidades {
         if (numero.equals("CANCELAR")){
             num = -1;
         } else {
-            if (numero.length() > 1) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
             num = Double.parseDouble(numero);
             if (num < minimo || num > maximo) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
