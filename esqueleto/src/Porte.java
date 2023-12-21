@@ -45,6 +45,7 @@ public class Porte {
         this.muelleDestino = muelleDestino;
         this.llegada = llegada;
         this.precio = precio;
+        huecos = new boolean [nave.getFilas()][nave.getColumnas()];
     }
     public String getID() {
         return id;
@@ -247,7 +248,7 @@ public class Porte {
                                     llegada = Utilidades.leerFechaHora(teclado, "Introduzaca la fecha de llegada: ");
                                 } while (llegada.anterior(salida) && llegada != null);
                                 if(llegada != null) {
-                                    precio = Utilidades.leerNumero(teclado, "Ingrese precio: ", 0, 200);
+                                    precio = Utilidades.leerNumero(teclado, "Ingrese precio: ", 0, 999999999);
                                 }
                             }
                         }

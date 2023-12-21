@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -112,7 +111,8 @@ public class PlanetExpress {
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         Cliente cliente;
         if (porte != null) {
-                cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
+            cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
+            System.out.println("Lomo. ");
             if(cliente != null && !cliente.maxEnviosAlcanzado()){
                 porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
             }
@@ -193,8 +193,9 @@ public class PlanetExpress {
                                 if(coincidentes != null ) {
                                     do {
                                         porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
-                                    } while (porteSeleccionado != null && !porteSeleccionado.porteLleno());
+                                    } while (porteSeleccionado != null && porteSeleccionado.porteLleno());
                                     planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
+                                    System.out.println("Patata. ");
                                 } else{
                                     System.out.println("Ningún porte reúne los requisitos de búsqueda. ");
                                 }
@@ -214,7 +215,9 @@ public class PlanetExpress {
                         envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío. ");
                         if(envio != null){
                             do {
+                                System.out.println("Chorizo. ");
                                 letra = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?: ", 'c', 'f');
+                                System.out.println("Lomo. ");
                                 if (letra == 'c') {
                                     cliente.cancelarEnvio(envio.getLocalizador());
                                     cliente.buscarEnvio(envio.getLocalizador()).cancelar();
