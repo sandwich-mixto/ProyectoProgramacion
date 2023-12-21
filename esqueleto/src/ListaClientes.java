@@ -49,14 +49,15 @@ public class ListaClientes {
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
         boolean encontrado = false;
+        Cliente cliente = null;
         int i = 0;
-        while ((clientes[i] != null) && !encontrado){
-            if (clientes [i].getEmail().equals(email)) {
+        while (i < clientes.length && !encontrado){
+            if (clientes[i] != null && clientes [i].getEmail().equals(email)) {
                 encontrado = true;
-                i++;
-            }
+                cliente = clientes[i];
+            } else i++;
         }
-        return clientes [i - 1];
+        return cliente;
     }
 
     /**
@@ -69,10 +70,15 @@ public class ListaClientes {
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
         Cliente cliente = null;
+        String cadena;
+        boolean continuar;
         do {
-            System.out.println(mensaje);
-            cliente = buscarClienteEmail(teclado.nextLine());
-        } while (cliente.getEmail().equals(buscarClienteEmail(teclado.nextLine())));
+            System.out.println("Chorizo. ");
+            cadena = Utilidades.leerCadena(teclado, mensaje);
+            cliente = buscarClienteEmail(cadena);
+            System.out.println(!cadena.equals("CANCELAR"));
+            System.out.println(cliente == null);
+        } while (!cadena.equals("CANCELAR") && cliente == null);
         return cliente;
     }
 
@@ -86,10 +92,12 @@ public class ListaClientes {
         PrintWriter pw = null;
         FileWriter fw = null;
         try {
-            fw = new FileWriter(new File(fichero), false);
+            fw = new FileWriter(fichero, false);
             pw = new PrintWriter(fw);
             for (int i = 0; i < clientes.length; i++) {
-                pw.println(clientes[i].getNombre() + ";" + clientes[i].getApellidos() + ";" + clientes[i].getEmail());
+                if(clientes[i] != null) {
+                    pw.println(clientes[i].getNombre() + ";" + clientes[i].getApellidos() + ";" + clientes[i].getEmail());
+                }
             }
             return true;
         } catch (FileNotFoundException e) {
@@ -108,20 +116,25 @@ public class ListaClientes {
      * @return lista de clientes.
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
+        Scanner entrada;
         ListaClientes listaClientes = new ListaClientes(capacidad);
         Cliente cliente;
         String [] linea;
         try {
-            Scanner sc = new Scanner(new File(fichero));
-            while (listaClientes.getOcupacion() < capacidad && sc.hasNext()){
-                linea = sc.nextLine().split(";");
+            entrada = new Scanner(new File(fichero));
+            while (listaClientes.getOcupacion() < capacidad && entrada.hasNext()){
+                linea = entrada.nextLine().split(";");
                 cliente = new Cliente(linea[0], linea[1], linea[2], maxEnviosPorCliente);
                 listaClientes.insertarCliente(cliente);
             }
-            sc.close();
-
-        } catch (Exception e) {
+            entrada.close();
+        } catch (FileNotFoundException exception){
             listaClientes = new ListaClientes(capacidad);
+            System.out.println("Fichero " + fichero + " no encontrado. ");
+        }
+        catch (Exception e) {
+            listaClientes = new ListaClientes(capacidad);
+            System.out.println("Error en la lectura de " + fichero);
         }
         return listaClientes;
     }

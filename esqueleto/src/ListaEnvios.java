@@ -60,13 +60,14 @@ public class ListaEnvios {
     public Envio buscarEnvio(String localizador) {
         int i = 0;
         boolean encontrado = false;
+        Envio envio = null;
         while ((i < envios.length) && !encontrado){
-            if (envios [i].getLocalizador().equals(localizador)){
+            if (envios[i] != null && envios[i].getLocalizador().equals(localizador)){
                 encontrado = true;
-            }
-            i++;
+                envio = envios[i];
+            } else i++;
         }
-        return envios[i];
+        return envio;
     }
 
     /**
@@ -140,10 +141,13 @@ public class ListaEnvios {
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         Envio envio = null;
+        String cadena;
         do {
-            System.out.println(mensaje);
-            envio = buscarEnvio(teclado.nextLine());
-        } while (envio.getLocalizador().equals(buscarEnvio(teclado.nextLine())));
+            cadena = Utilidades.leerCadena(teclado, mensaje);
+            if(!cadena.equals("CANCELAR")) {
+                envio = buscarEnvio(cadena);
+            }
+        } while (!cadena.equals("CANCELAR") && envio == null);
         return envio;
     }
 
@@ -156,7 +160,7 @@ public class ListaEnvios {
         PrintWriter pw = null;
         FileWriter fw = null;
         try {
-            fw = new FileWriter(new File(fichero), true);
+            fw = new FileWriter(fichero, true);
             pw = new PrintWriter(fw);
             for (int i = 0; i < envios.length; i++){
                 listarEnvios();
@@ -185,25 +189,29 @@ public class ListaEnvios {
      * @param clientes lista de clientes.
      */
     public static void leerEnviosCsv(String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
-        Scanner sc = null;
+        Scanner entrada;
         Porte porte;
         Envio envio;
         Cliente cliente;
-        String linea ="";
+        String linea;
+        String [] argumentos;
         try {
-            sc = new Scanner(new File(ficheroEnvios));
-            while (sc.hasNextLine()) {
-                linea = sc.nextLine();
-                cliente = clientes.buscarClienteEmail(linea.split(";")[2]);
-                porte = portes.buscarPorte(linea.split(";")[1]);
-                envio = new Envio(linea.split(";")[0], porte, cliente, Integer.parseInt(linea.split(";")[3]), Integer.parseInt(linea.split(";")[4]), Double.parseDouble(linea.split(";")[5]));
+            entrada = new Scanner(new File(ficheroEnvios));
+            while (entrada.hasNextLine()) {
+                linea = entrada.nextLine();
+                argumentos = linea.split(";");
+                cliente = clientes.buscarClienteEmail(argumentos[2]);
+                porte = portes.buscarPorte(argumentos[1]);
+                envio = new Envio(argumentos[0], porte, cliente, Integer.parseInt(argumentos[3]), Integer.parseInt(argumentos[4]), Double.parseDouble(argumentos[5]));
                 cliente.aniadirEnvio(envio);
                 porte.ocuparHueco(envio);
             }
-            sc.close();
-        } catch (Exception e) {
-            System.out.println("No se ha encontrado el fichero de envíos" + e.getMessage());
-        }
+            entrada.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero " + ficheroEnvios);
+        } catch (Exception e){
+            System.out.println("Error en la lectura de " + ficheroEnvios);
         }
     }
+}
 

@@ -121,7 +121,7 @@ public class ListaPortes {
      */
     public boolean escribirPortesCsv(String fichero) {
         try {
-            PrintWriter pw = new PrintWriter(new File(fichero));
+            PrintWriter pw = new PrintWriter(fichero);
             Porte porte;
             for(int i = 0; i < portes.length; i++){
                 porte = this.getPorte(i);
@@ -146,21 +146,28 @@ public class ListaPortes {
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
+        Scanner entrada;
         Porte porte;
-        String[] linea;
+        String linea;
+        String[] argumentos;
         try {
-            int i = 0;
-            Scanner sc = new Scanner(new File(fichero));
-            while (sc.hasNextLine() && i < capacidad){
-                i++;
-                linea = sc.nextLine().split(";");
-                porte = new Porte(linea[0], naves.buscarNave(linea[1]), puertosEspaciales.buscarPuertoEspacial(linea[2]), Integer.parseInt(linea[3]), Fecha.fromString(linea[4]), puertosEspaciales.buscarPuertoEspacial(linea[5]), Integer.parseInt(linea[6]), Fecha.fromString(linea[7]), Double.parseDouble(linea[8]));
+            entrada = new Scanner(new File(fichero));
+            while (entrada.hasNextLine() && !listaPortes.estaLlena()){
+                linea = entrada.nextLine();
+                argumentos = linea.split(";");
+                porte = new Porte(argumentos[0], naves.buscarNave(argumentos[1]), puertosEspaciales.buscarPuertoEspacial(argumentos[2]), Integer.parseInt(argumentos[3]), Fecha.fromString(argumentos[4]), puertosEspaciales.buscarPuertoEspacial(argumentos[5]), Integer.parseInt(argumentos[6]), Fecha.fromString(argumentos[7]), Double.parseDouble(argumentos[8]));
                 listaPortes.insertarPorte(porte);
             }
-            sc.close();
-        } catch (Exception e) {
+            entrada.close();
+        }catch (FileNotFoundException e){
             listaPortes = new ListaPortes(capacidad);
+            System.out.println("Fichero " + fichero + " no encontrado. ");
         }
+        catch (Exception e) {
+            listaPortes = new ListaPortes(capacidad);
+            System.out.println("Error en la lectura del fichero " + fichero);
+        }
+        System.out.println(listaPortes == null);
         return listaPortes;
     }
 }
