@@ -1,7 +1,4 @@
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 /**
  * Description of the class: Lista que contiene los puertos espaciales.
@@ -63,11 +60,14 @@ public class ListaPuertosEspaciales {
         boolean encontrado = false;
         int i = 0;
         while (!encontrado && i < lista.length){
-            encontrado = lista [i].getCodigo().equals(codigo);
-            i++;
+            System.out.println(lista[i] == null);
+            if (lista[i] != null && lista[i].getCodigo().equals(codigo)) {
+                encontrado = true;
+                System.out.println("Lo que sea");
+            } else i++;
         }
         if (encontrado){
-            res = lista [i - 1];
+            res = lista[i];
         }
         return res;
     }
@@ -105,7 +105,7 @@ public class ListaPuertosEspaciales {
         FileWriter fw = null;
         boolean salir = false;
         try {
-            fw = new FileWriter(nombre, false);
+            fw = new FileWriter(new File(nombre), false);
             pw = new PrintWriter(fw);
             for (int i = 0; i < lista.length; i++){
                 pw.printf("%s;%s;%01.3f;%01.01f;%01.01f;%d", lista[i].getNombre(),lista[i].getCodigo(),lista[i].getRadio(),lista[i].getAzimut(),lista[i].getPolar(),lista[i].getMuelles());
@@ -129,13 +129,15 @@ public class ListaPuertosEspaciales {
         PuertoEspacial puertoEspacial;
         String [] linea;
         try {
-            Scanner sc = new Scanner(fichero);
-            while (listaPuertosEspaciales.getOcupacion() < capacidad && sc.hasNext()){
-                linea = sc.nextLine().split(";");
-                puertoEspacial = new PuertoEspacial(sc.next(), sc.next(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextInt());
+            Scanner entrada = new Scanner(new FileReader(fichero));
+            linea = entrada.nextLine().split(";");
+            while (listaPuertosEspaciales.getOcupacion() < capacidad && (linea[0] != null)){
+                System.out.println(linea[0]);
+                linea = entrada.nextLine().split(";");
+                puertoEspacial = new PuertoEspacial(linea[0], linea[1], Double.parseDouble(linea[2]), Double.parseDouble(linea[3]), Double.parseDouble(linea[4]), Integer.parseInt(linea[5]));
                 listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
             }
-            sc.close();
+            entrada.close();
         } catch (Exception e) {
             listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         }

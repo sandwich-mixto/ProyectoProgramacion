@@ -86,7 +86,7 @@ public class ListaClientes {
         PrintWriter pw = null;
         FileWriter fw = null;
         try {
-            fw = new FileWriter(fichero, false);
+            fw = new FileWriter(new File(fichero), false);
             pw = new PrintWriter(fw);
             for (int i = 0; i < clientes.length; i++) {
                 pw.println(clientes[i].getNombre() + ";" + clientes[i].getApellidos() + ";" + clientes[i].getEmail());
@@ -112,7 +112,7 @@ public class ListaClientes {
         Cliente cliente;
         String [] linea;
         try {
-            Scanner sc = new Scanner(fichero);
+            Scanner sc = new Scanner(new File(fichero));
             while (listaClientes.getOcupacion() < capacidad && sc.hasNext()){
                 linea = sc.nextLine().split(";");
                 cliente = new Cliente(linea[0], linea[1], linea[2], maxEnviosPorCliente);

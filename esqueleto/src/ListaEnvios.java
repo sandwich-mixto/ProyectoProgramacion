@@ -156,7 +156,7 @@ public class ListaEnvios {
         PrintWriter pw = null;
         FileWriter fw = null;
         try {
-            fw = new FileWriter(fichero, true);
+            fw = new FileWriter(new File(fichero), true);
             pw = new PrintWriter(fw);
             for (int i = 0; i < envios.length; i++){
                 listarEnvios();
@@ -191,7 +191,7 @@ public class ListaEnvios {
         Cliente cliente;
         String linea ="";
         try {
-            sc = new Scanner(ficheroEnvios);
+            sc = new Scanner(new File(ficheroEnvios));
             while (sc.hasNextLine()) {
                 linea = sc.nextLine();
                 cliente = clientes.buscarClienteEmail(linea.split(";")[2]);

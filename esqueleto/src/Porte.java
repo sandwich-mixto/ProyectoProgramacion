@@ -226,7 +226,9 @@ public class Porte {
         do {
             id = generarID(rand);
         } while (portes.buscarPorte(id) != null);
-        origen = puertosEspaciales.buscarPuertoEspacial(Utilidades.leerCadena(teclado, "Puerto de origen: "));
+        do {
+            origen = puertosEspaciales.buscarPuertoEspacial(Utilidades.leerCadena(teclado, "Puerto de origen: "));
+        } while (origen == null);
         if(origen != null) {
             muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de origen: ", 1, origen.getMuelles());
             if(muelleOrigen != -1) {

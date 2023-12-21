@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -120,7 +121,7 @@ public class ListaPortes {
      */
     public boolean escribirPortesCsv(String fichero) {
         try {
-            PrintWriter pw = new PrintWriter(fichero);
+            PrintWriter pw = new PrintWriter(new File(fichero));
             Porte porte;
             for(int i = 0; i < portes.length; i++){
                 porte = this.getPorte(i);
@@ -149,7 +150,7 @@ public class ListaPortes {
         String[] linea;
         try {
             int i = 0;
-            Scanner sc = new Scanner(fichero);
+            Scanner sc = new Scanner(new File(fichero));
             while (sc.hasNextLine() && i < capacidad){
                 i++;
                 linea = sc.nextLine().split(";");
