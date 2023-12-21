@@ -19,12 +19,12 @@ public class PuertoEspacial {
     /**
      * Constructor of the class
      *
-     * @param nombre el nombre del puerto espacial
-     * @param codigo el codigo identificativo otorgado por la Galactic Federation of Spaceport Coordination
-     * @param radio las unidades de distancia desde el sol hasta el punto dado
-     * @param azimut  el ángulo desde el eje positivo x hasta la proyección del punto en el plano xy
-     * @param polar el ángulo desde el eje positivo z hasta el puerto
-     * @param numMuelles número de muelles de carga del puerto espacial
+     * @param nombre el nombre del puerto espacial.
+     * @param codigo el código identificativo otorgado por la Galactic Federation of Spaceport Coordination.
+     * @param radio las unidades de distancia desde el sol hasta el punto dado.
+     * @param azimut  el ángulo desde el eje positivo x hasta la proyección del punto en el plano xy.
+     * @param polar el ángulo desde el eje positivo z hasta el puerto.
+     * @param numMuelles número de muelles de carga del puerto espacial.
      */
     public PuertoEspacial(String nombre, String codigo, double radio, double azimut, double polar, int numMuelles) {
         this.nombre = nombre;
@@ -57,8 +57,8 @@ public class PuertoEspacial {
     /**
      * TODO: Método para calcular la distancia entre el puerto espacial que recibe el mensaje y el puerto
      *  espacial "destino" siguiendo las ecuaciones del enunciado (Las formulas se encuentran en el enunciado)
-     * @param destino destino del envio
-     * @return devuelve la distancia que tiene que recorrer la nave
+     * @param destino destino del envío.
+     * @return devuelve la distancia que tiene que recorrer la nave.
      */
     public double distancia(PuertoEspacial destino) {
         // TODO: Para calcular la distancia entre dos Puertos Espaciales, se transforman sus coordenadas esféricas a cartesianas

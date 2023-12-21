@@ -137,7 +137,6 @@ public class ListaPuertosEspaciales {
         Scanner sc = null;
         FileReader fr = null;
         int i = 0;
-        String linea = "";
         PuertoEspacial puertoEspacial;
         try {
             fr = new FileReader(fichero);
@@ -147,19 +146,9 @@ public class ListaPuertosEspaciales {
                 puertoEspacial = new PuertoEspacial(sc.next(), sc.next(), sc.nextDouble(), sc.nextDouble(), sc.nextDouble(), sc.nextInt());
                 listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
             }
+            fr.close();
         } catch (Exception e) {
-            return null;
-        } finally {
-            if (sc != null){
-                sc.close();
-            }
-            if (fr != null){
-                try {
-                    fr.close();
-                } catch (IOException e){
-                    return null;
-                }
-            }
+            listaPuertosEspaciales = null;
         }
         return listaPuertosEspaciales;
     }

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Description of the class
- * Clase que contiene distintos metodos para leer numeros, letras o fechas, obligando a que se introduzcan datos dentro de los limites deseados
+ * Clase que contiene distintos métodos para leer números, letras o fechas, obligando a que se introduzcan datos dentro de los límites deseados.
  *
  * @author Jorge Jiménez Navas
  * @author Carlos Gonzalez Diaz
@@ -12,11 +12,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado Entrada estandar
-     * @param mensaje Mensaje que se le muestra al usuario por pantalla
-     * @param minimo Valor minimo que puede tomar el numero
-     * @param maximo Valor maximo que puede tomar el numero
-     * @return int numero Valor del numero que devuelve en caso de que sea correcto
+     * @param teclado Entrada estandar.
+     * @param mensaje Mensaje que se le muestra al usuario por pantalla.
+     * @param minimo Valor mínimo que puede tomar el numero.
+     * @param maximo Valor máximo que puede tomar el numero.
+     * @return int número Valor del número que devuelve en caso de que sea correcto.
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
 
@@ -24,7 +24,7 @@ public class Utilidades {
         numero = teclado.nextLine();
         int num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -34,24 +34,24 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado Entrada estandar
-     * @param mensaje Ensaje que se muestra al usuario por pantalla
-     * @param minimo Valor minimo que puede tomar el numero
-     * @param maximo Valor maximo que puede tomar el numero
-     * @return long numero Valor del numero que devuelve en caso de que sea correcto
+     * @param teclado Entrada estandar.
+     * @param mensaje Ensaje que se muestra al usuario por pantalla.
+     * @param minimo Valor mínimo que puede tomar el numero.
+     * @param maximo Valor máximo que puede tomar el numero.
+     * @return long número Valor del número que devuelve en caso de que sea correcto.
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         String numero;
         numero = teclado.nextLine();
         long num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -61,24 +61,24 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado Entrada estandar
-     * @param mensaje Mensaje que se muestra al usuario por pantalla
-     * @param minimo Valor minimo que puede tomar el numero
-     * @param maximo Valor maximo que puede tomar el numero
-     * @return double numero Valor del numero que devuelve en caso de que sea correcto
+     * @param teclado Entrada estandar.
+     * @param mensaje Mensaje que se muestra al usuario por pantalla.
+     * @param minimo Valor mínimo que puede tomar el numero.
+     * @param maximo Valor máximo que puede tomar el numero.
+     * @return double número Valor del número que devuelve en caso de que sea correcto.
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         String numero;
         numero = teclado.nextLine();
         double num;
         if (numero.equals("CANCELAR")){
-            return -1;
+            num = -1;
         } else {
             if (numero.length() > 1) {
                 num = leerNumero(teclado, mensaje, minimo, maximo);
@@ -88,17 +88,17 @@ public class Utilidades {
                 System.out.println(mensaje);
                 num = leerNumero(teclado, mensaje, minimo, maximo);
             }
-            return num;
         }
+        return num;
     }
 
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado Entrada estandar
-     * @param mensaje Mensaje que se muestra al usuario por pantalla
-     * @param minimo Valor minimo que puede tomar el numero
-     * @param maximo Valor maximo que puede tomar el numero
-     * @return char letra Devuelve la letra que ha leido en caso de que sea correcta
+     * @param teclado Entrada estandar.
+     * @param mensaje Mensaje que se muestra al usuario por pantalla.
+     * @param minimo Valor mínimo que puede tomar el numero.
+     * @param maximo Valor máximo que puede tomar el numero.
+     * @return char letra Devuelve la letra que ha leido en caso de que sea correcta.
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
@@ -113,9 +113,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
-     * @param teclado Entrada estandar
-     * @param mensaje Mensaje que se muestra por pantalla al usuario
-     * @return Fecha Devuelve la fecha que ga leido en caso de que sea correcta
+     * @param teclado Entrada estandar.
+     * @param mensaje Mensaje que se muestra por pantalla al usuario.
+     * @return Fecha Devuelve la fecha que ga leido en caso de que sea correcta.
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
@@ -158,9 +158,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
-     * @param teclado Entrada estandar
-     * @param mensaje Mensaje que se muestra por pantalla al usuario
-     * @return Fecha Devuelve la fecha que ha leido en caso de que sea correcta
+     * @param teclado Entrada estandar.
+     * @param mensaje Mensaje que se muestra por pantalla al usuario.
+     * @return Fecha Devuelve la fecha que ha leido en caso de que sea correcta.
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         System.out.println(mensaje);
@@ -235,9 +235,9 @@ public class Utilidades {
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
-     * @param teclado Entrada estandar
-     * @param s Cadena que queremos leer
-     * @return Devuelve la cadena leida
+     * @param teclado Entrada estandar.
+     * @param s Cadena que queremos leer.
+     * @return Devuelve la cadena leida.
      */
     public static String leerCadena(Scanner teclado, String s) {
         System.out.print(s);
