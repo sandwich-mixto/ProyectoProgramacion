@@ -133,7 +133,7 @@ public class ListaNaves {
             }
             sc.close();
         } catch (Exception e) {
-            listaNaves = null;
+            listaNaves = new ListaNaves(capacidad);
         }
         return listaNaves;
     }
