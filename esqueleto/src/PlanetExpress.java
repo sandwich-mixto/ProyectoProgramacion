@@ -112,8 +112,8 @@ public class PlanetExpress {
         Cliente cliente;
         if (porte != null) {
             cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
-            System.out.println("Lomo. ");
             if(cliente != null && !cliente.maxEnviosAlcanzado()){
+
                 porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
             }
         }
@@ -214,12 +214,10 @@ public class PlanetExpress {
                         envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío. ");
                         if(envio != null){
                             do {
-                                System.out.println("Chorizo. ");
                                 letra = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?: ", 'c', 'f');
-                                System.out.println("Lomo. ");
                                 if (letra == 'c') {
-                                    cliente.cancelarEnvio(envio.getLocalizador());
                                     cliente.buscarEnvio(envio.getLocalizador()).cancelar();
+                                    cliente.cancelarEnvio(envio.getLocalizador());
                                 } else if (letra == 'f') {
                                     do {
                                         fichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");

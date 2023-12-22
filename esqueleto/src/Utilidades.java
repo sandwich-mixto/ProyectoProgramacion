@@ -19,19 +19,15 @@ public class Utilidades {
      * @return int número Valor del número que devuelve en caso de que sea correcto.
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
-        System.out.println(mensaje);
-        String numero;
-        numero = teclado.nextLine();
-        int num;
-        if (numero.equals("CANCELAR")){
-            num = -1;
-        } else {
-            num = Integer.parseInt(numero);
-            if (num < minimo || num > maximo) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
+        System.out.print(mensaje);
+        int numero;
+        numero = teclado.nextInt();
+        //Introducir -1 equivale a CANCELAR.
+        if(numero != -1 && (numero < minimo || numero > maximo)){
+            numero = leerNumero(teclado, mensaje, minimo, maximo);
         }
-        return num;
+        teclado.nextLine();
+        return numero;
     }
 
     /**
@@ -43,19 +39,15 @@ public class Utilidades {
      * @return long número Valor del número que devuelve en caso de que sea correcto.
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
-        System.out.println(mensaje);
-        String numero;
-        numero = teclado.nextLine();
-        long num;
-        if (numero.equals("CANCELAR")){
-            num = -1;
-        } else {
-            num = Long.parseLong(numero);
-            if (num < minimo || num > maximo) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
+        System.out.print(mensaje);
+        long numero;
+        numero = teclado.nextInt();
+        //Introducir -1 equivale a CANCELAR.
+        if(numero != -1 && (numero < minimo || numero > maximo)){
+            numero = leerNumero(teclado, mensaje, minimo, maximo);
         }
-        return num;
+        teclado.nextLine();
+        return numero;
     }
 
     /**
@@ -67,19 +59,15 @@ public class Utilidades {
      * @return double número Valor del número que devuelve en caso de que sea correcto.
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
-        System.out.println(mensaje);
-        String numero;
-        numero = teclado.nextLine();
-        double num;
-        if (numero.equals("CANCELAR")){
-            num = -1;
-        } else {
-            num = Double.parseDouble(numero);
-            if (num < minimo || num > maximo) {
-                num = leerNumero(teclado, mensaje, minimo, maximo);
-            }
+        System.out.print(mensaje);
+        double numero;
+        numero = teclado.nextInt();
+        //Introducir -1 equivale a CANCELAR.
+        if(numero != -1 && (numero < minimo || numero > maximo)){
+            numero = leerNumero(teclado, mensaje, minimo, maximo);
         }
-        return num;
+        teclado.nextLine();
+        return numero;
     }
 
     /**

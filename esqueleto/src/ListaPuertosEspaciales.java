@@ -103,7 +103,7 @@ public class ListaPuertosEspaciales {
             fw = new FileWriter(nombre, false);
             pw = new PrintWriter(fw);
             for (int i = 0; i < lista.length; i++){
-                pw.printf("%s;%s;%01.3f;%01.01f;%01.01f;%d", lista[i].getNombre(),lista[i].getCodigo(),lista[i].getRadio(),lista[i].getAzimut(),lista[i].getPolar(),lista[i].getMuelles());
+                pw.printf("%s;%s;%01.3f;%01.01f;%01.01f;%d\n", lista[i].getNombre(),lista[i].getCodigo(),lista[i].getRadio(),lista[i].getAzimut(),lista[i].getPolar(),lista[i].getMuelles());
             }
             return true;
         } catch (Exception e) {

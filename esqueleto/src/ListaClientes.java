@@ -69,15 +69,11 @@ public class ListaClientes {
      * @return cliente selecionado.
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
-        Cliente cliente = null;
+        Cliente cliente;
         String cadena;
-        boolean continuar;
         do {
-            System.out.println("Chorizo. ");
             cadena = Utilidades.leerCadena(teclado, mensaje);
             cliente = buscarClienteEmail(cadena);
-            System.out.println(!cadena.equals("CANCELAR"));
-            System.out.println(cliente == null);
         } while (!cadena.equals("CANCELAR") && cliente == null);
         return cliente;
     }
@@ -89,22 +85,25 @@ public class ListaClientes {
      * @return fichero editado.
      */
     public boolean escribirClientesCsv(String fichero) {
-        PrintWriter pw = null;
-        FileWriter fw = null;
+        boolean resultado;
+        PrintWriter salida;
+        Cliente cliente;
         try {
-            fw = new FileWriter(fichero, false);
-            pw = new PrintWriter(fw);
-            for (int i = 0; i < clientes.length; i++) {
-                if(clientes[i] != null) {
-                    pw.println(clientes[i].getNombre() + ";" + clientes[i].getApellidos() + ";" + clientes[i].getEmail());
-                }
+            salida = new PrintWriter(fichero);
+            for (int i = 0; i < this.getOcupacion(); i++) {
+                cliente = getCliente(i);
+                salida.println(cliente.getNombre() + ";" + cliente.getApellidos() + ";" + cliente.getEmail());
             }
-            return true;
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
+            salida.close();
+            resultado = true;
+        }catch (FileNotFoundException e){
+            System.out.println("No se encontró el fichero " + fichero);
+            resultado = false;
+        }catch (Exception e){
+            System.out.println("Error de escritura del fichero "+ fichero);
+            resultado = false;
         }
+        return resultado;
     }
 
     /**

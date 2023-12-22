@@ -62,7 +62,7 @@ public class ListaNaves {
         Nave resul = null;
         if(matricula != null && !matricula.equals("CANCELAR")){
             while(i < naves.length && !encontrado){
-                if(naves[i].getMatricula().equals(matricula)){
+                if(naves[i] != null && naves[i].getMatricula().equals(matricula)){
                     encontrado = true;
                 } else i++;
             }

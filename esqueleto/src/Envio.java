@@ -135,7 +135,6 @@ public class Envio {
         double precio = -1;
         porte.imprimirMatrizHuecos();
         do {
-            System.out.println("Jamón serrano, pata negra, 5 jotas.");
             if((fila = Utilidades.leerNumero(teclado, "Fila del hueco: ", 1, porte.getNave().getFilas())) != -1){
                 if((columna = Utilidades.leerNumero(teclado, "Columna del hueco: ", 1, porte.getNave().getColumnas())) != -1);{
                     precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1, 999999999);

@@ -105,18 +105,13 @@ public class ListaEnvios {
     public boolean eliminarEnvio (String localizador) {
         int i = 0;
         boolean encontrado = false;
-        while ((i < envios.length) && !encontrado){
-            if (envios[i].getLocalizador().equals(localizador)){
+        while (i < envios.length && !encontrado){
+            if (envios[i] != null && envios[i].getLocalizador().equals(localizador)){
                 encontrado = true;
-            }
-            i++;
+                envios[i] = null;
+            } else i++;
         }
-        if (encontrado) {
-            envios[i] = envios[i + 1];
-            return true;
-        } else {
-            return false;
-        }
+        return encontrado;
     }
 
     /**

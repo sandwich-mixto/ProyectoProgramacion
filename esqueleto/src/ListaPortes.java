@@ -120,6 +120,7 @@ public class ListaPortes {
      * @return True si consigue escribir, false si falla.
      */
     public boolean escribirPortesCsv(String fichero) {
+        boolean resultado;
         try {
             PrintWriter pw = new PrintWriter(fichero);
             Porte porte;
@@ -130,10 +131,15 @@ public class ListaPortes {
                 }
             }
             pw.close();
-            return true;
+            resultado = true;
         } catch (FileNotFoundException e) {
-            return false;
+            resultado = false;
+            System.out.println("No se encontró el archivo " + fichero);
+        } catch (Exception e){
+            resultado = false;
+            System.out.println("Error al escribir el fichero " + fichero);
         }
+        return resultado;
     }
     /**
      * TODO: Genera una lista de Portes a partir del fichero CSV, usando los límites especificados como argumentos para
