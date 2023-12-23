@@ -105,7 +105,7 @@ public class ListaPuertosEspaciales {
             for (int i = 0; i < lista.length; i++){
                 puerto = getPuertoEspacial(i);
                 if(puerto != null) {
-                    salida.println(puerto.getNombre() + ";" + puerto.getCodigo() + ";" + puerto.getRadio() + ";" + puerto.getAzimut() + ";" + puerto.getPolar() + ":" + puerto.getMuelles());
+                    salida.println(puerto.getNombre() + ";" + puerto.getCodigo() + ";" + puerto.getRadio() + ";" + puerto.getAzimut() + ";" + puerto.getPolar() + ";" + puerto.getMuelles());
                 }
             }
             resultado = true;

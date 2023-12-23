@@ -187,6 +187,7 @@ public class PlanetExpress {
                         letra = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'e', 'n');
                         switch (letra){
                             case 'n':
+                                teclado.nextLine();//Elimina un salto de línea.
                                 if(!planetExpress.maxClientesAlcanzado()){
                                     cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
                                     planetExpress.insertarCliente(cliente);
@@ -196,10 +197,7 @@ public class PlanetExpress {
                             case 'e':
                                 if(coincidentes != null ) {
                                     do {
-                                        for (int i = 0; i < coincidentes.getOcupacion(); i++) {
-                                            System.out.println(coincidentes.getPorte(i).toStringSimple());
-                                        }
-                                        porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
+                                        porteSeleccionado = coincidentes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
                                     } while (porteSeleccionado != null && porteSeleccionado.porteLleno());
                                     planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);
                                 } else{

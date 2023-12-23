@@ -132,15 +132,15 @@ public class Envio {
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
         Envio envio = null;
         int fila = -1, columna = -1;
-        double precio = -1;
+        double precio;
         porte.imprimirMatrizHuecos();
         do {
-            if((fila = Utilidades.leerNumero(teclado, "Fila del hueco: ", 1, porte.getNave().getFilas())) != -1){
-                if((columna = Utilidades.leerNumero(teclado, "Columna del hueco: ", 1, porte.getNave().getColumnas())) != -1);{
-                    precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1.00, 999999999.99);
-                }
+            fila = Utilidades.leerNumero(teclado, "Fila del hueco: ", 1, porte.getNave().getFilas());
+            if(fila != -1){
+                columna = Utilidades.leerNumero(teclado, "Columna del hueco: ", 1, porte.getNave().getColumnas());
             }
-        }while(porte.huecoOcupado(fila, columna) && precio == -1 && columna == -1 && fila == -1);
+        }while(porte.huecoOcupado(fila, columna) && columna != -1 && fila != -1);
+        precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1.00, 999999999.99);
         if(precio != -1 && columna != -1 && fila != -1){
             String localizador = generarLocalizador(rand, porte.getID());
             envio = new Envio(localizador, porte, cliente, fila, columna, precio);

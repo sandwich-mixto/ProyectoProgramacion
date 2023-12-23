@@ -152,7 +152,7 @@ public class ListaEnvios {
      * @return fichero con los envíos añadidos.
      */
     public boolean aniadirEnviosCsv(String fichero) {
-        boolean resultado = false;
+        boolean resultado;
         PrintWriter salida;
         Envio envio;
         try {
@@ -160,7 +160,7 @@ public class ListaEnvios {
             for(int i = 0; i < envios.length; i++){
                 envio = envios[i];
                 if(envio != null){
-                    salida.println(envio.getLocalizador() + ";" + envio.getPorte() + ";" + envio.getCliente().getEmail() + ";" + envio.getFila() + ";" + envio.getColumna() + ";" + envio.getPrecio());
+                    salida.println(envio.getLocalizador() + ";" + envio.getPorte().getID() + ";" + envio.getCliente().getEmail() + ";" + envio.getFila() + ";" + envio.getColumna() + ";" + envio.getPrecio());
                 }
             }
             salida.close();

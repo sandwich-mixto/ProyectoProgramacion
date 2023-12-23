@@ -113,7 +113,7 @@ public class Porte {
     public boolean ocuparHueco(Envio envio) {
         boolean resul = false;
         if(!this.huecoOcupado(envio.getFila(), envio.getColumna())){
-            huecos[envio.getFila()][envio.getColumna()] = true;
+            huecos[envio.getFila()-1][envio.getColumna()-1] = true;
             resul = listaEnvios.insertarEnvio(envio);
         }
         return resul;
@@ -257,7 +257,7 @@ public class Porte {
                     destino = puertosEspaciales.buscarPuertoEspacial(cadenaDestino);
                 }while (!cadenaDestino.equals("CANCELAR") && destino == null);
                 if(!cadenaDestino.equals("CANCELAR")) {
-                    muelleDestino = Utilidades.leerNumero(teclado, "Ingrese terminal de de destino (1 - : " + destino.getMuelles() + "): ", 1, destino.getMuelles());
+                    muelleDestino = Utilidades.leerNumero(teclado, "Ingrese terminal de de destino (1 - " + destino.getMuelles() + "): ", 1, destino.getMuelles());
                     if(muelleDestino != -1) {
                         naves.mostrarNaves();
                         do {
