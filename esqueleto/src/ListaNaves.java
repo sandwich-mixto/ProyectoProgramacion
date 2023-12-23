@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 /**
- * Description of the class
+ * Description of the class: Lista para organizar las naves que posee la empresa.
  *
  * @author Carlos Gonzalez Diaz
  * @author Jorge Jiménez Navas
@@ -92,9 +92,11 @@ public class ListaNaves {
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         Nave nave;
+        String cadena;
         do{
-            nave = buscarNave(Utilidades.leerCadena(teclado, mensaje));
-        } while(nave.getAlcance() < alcance && nave != null);
+            cadena = Utilidades.leerCadena(teclado, mensaje);
+            nave = buscarNave(cadena);
+        } while(!cadena.equals("CANCELAR") && nave != null && nave.getAlcance() < alcance);
         return nave;
     }
     /**
