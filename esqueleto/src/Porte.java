@@ -187,12 +187,21 @@ public class Porte {
         try {
             pw = new PrintWriter(fichero);
             pw.println("--------------------------------------------------------------");
-            pw.println("--------- Lista de envíos del porte " + getID() + " ---------");
+            pw.println("-------------- Lista de envíos del porte " + getID() + " --------------");
             pw.println("--------------------------------------------------------------");
-            for(int i = 0 ; i < listaEnvios.getOcupacion(); i++){
-                envio = listaEnvios.getEnvio(i);
-                if(envio != null){
-                    pw.println(envio.getFila() + ((char)envio.getColumna() + 'A') + envio.getCliente().toString());
+
+            for (int i = 0; i < listaEnvios.getOcupacion(); i++) {
+                for (int j = 0; j < listaEnvios.getOcupacion(); j++) {
+                    if(listaEnvios.buscarEnvio(getID(), i, j) != null) {
+                        pw.print(i+1);
+                        pw.print((char)(j + 'A') + " ");
+                        pw.print(listaEnvios.buscarEnvio(getID(), i, j).getCliente().toString());
+                        pw.println();
+                    } else {
+                        pw.print(i+1);
+                        pw.print((char)(j + 'A'));
+                        pw.println();
+                    }
                 }
             }
             pw.close();

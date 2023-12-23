@@ -79,22 +79,15 @@ public class ListaEnvios {
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         int x = 0;
-        boolean encontrado1 = false;
-        boolean encontrado2 = false;
-        while ((fila < envios.length) && !encontrado1){
-                if (envios [x].getPorte().toString().equals(idPorte)){
-                    encontrado1 = true;
-                }
-                x++;
-                if (encontrado1){
-                    while ((fila < envios [x].getFila() && columna < envios [x].getColumna()) && !encontrado2){
-                        if (envios [x].getPorte().buscarEnvio(fila, columna) != null){
-                            encontrado2 = true;
-                        }
-                    }
-                }
-            }
-            return envios[x];
+        boolean encontrado = false;
+        Envio resultado = null;
+        while(x < envios.length && !encontrado){
+            if(envios[x] != null && envios[x].getPorte().getID().equals(idPorte) && envios[x].getFila() == fila && envios[x].getColumna() == columna){
+                encontrado = true;
+                resultado = envios[x];
+            } else x++;
+        }
+        return resultado;
         }
 
     /**

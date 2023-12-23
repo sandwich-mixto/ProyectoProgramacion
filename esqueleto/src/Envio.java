@@ -51,7 +51,7 @@ public class Envio {
     }
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
     public String getHueco() {
-        return (Integer.toString(fila) + ('A' + columna));
+        return (Integer.toString(fila) + (char)('A' + columna));
     }
     public double getPrecio() {
         return precio;
@@ -114,7 +114,7 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 9; i++){
             localizador.append((char)rand.nextInt('A', 'Z'));
         }
         return localizador.toString();
