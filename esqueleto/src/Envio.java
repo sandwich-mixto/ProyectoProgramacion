@@ -90,7 +90,7 @@ public class Envio {
             pw.println("--------- Factura del envío " + localizador + " ---------");
             pw.println("-----------------------------------------------------");
             pw.println("Porte: " + porte.getID());
-            pw.println("Origen: " + porte.getDestino().toStringSimple());
+            pw.println("Origen: " + porte.getOrigen().toStringSimple());
             pw.println("Destino: " + porte.getDestino().toStringSimple());
             pw.println("Salida: " + porte.getSalida().toString());
             pw.println("LLegada: " + porte.getLlegada().toString());
@@ -137,7 +137,7 @@ public class Envio {
         do {
             if((fila = Utilidades.leerNumero(teclado, "Fila del hueco: ", 1, porte.getNave().getFilas())) != -1){
                 if((columna = Utilidades.leerNumero(teclado, "Columna del hueco: ", 1, porte.getNave().getColumnas())) != -1);{
-                    precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1, 999999999);
+                    precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1.00, 999999999.99);
                 }
             }
         }while(porte.huecoOcupado(fila, columna) && precio == -1 && columna == -1 && fila == -1);

@@ -97,29 +97,27 @@ public class ListaPuertosEspaciales {
      * @return True si funciona correctamente. False si falla.
      */
     public boolean escribirPuertosEspacialesCsv(String nombre) {
-        PrintWriter pw = null;
-        FileWriter fw = null;
+        boolean resultado;
+        PrintWriter salida;
+        PuertoEspacial puerto;
         try {
-            fw = new FileWriter(nombre, false);
-            pw = new PrintWriter(fw);
+            salida = new PrintWriter(new File(nombre));
             for (int i = 0; i < lista.length; i++){
-                pw.printf("%s;%s;%01.3f;%01.01f;%01.01f;%d\n", lista[i].getNombre(),lista[i].getCodigo(),lista[i].getRadio(),lista[i].getAzimut(),lista[i].getPolar(),lista[i].getMuelles());
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        } finally {
-            if (pw != null){
-                pw.close();
-            }
-            if (fw != null){
-                try {
-                    fw.close();
-                } catch (IOException e) {
-                    return false;
+                puerto = getPuertoEspacial(i);
+                if(puerto != null) {
+                    salida.println(puerto.getNombre() + ";" + puerto.getCodigo() + ";" + puerto.getRadio() + ";" + puerto.getAzimut() + ";" + puerto.getPolar() + ":" + puerto.getMuelles());
                 }
             }
+            resultado = true;
+            salida.close();
+        } catch (FileNotFoundException e){
+            System.out.println("No se encontró el fichero " + nombre);
+            resultado = false;
+        } catch (Exception e) {
+            System.out.println("Error en la escritura de " + nombre);
+            resultado = false;
         }
+        return resultado;
     }
     /**
      * TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima

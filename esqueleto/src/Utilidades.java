@@ -41,7 +41,7 @@ public class Utilidades {
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         System.out.print(mensaje);
         long numero;
-        numero = teclado.nextInt();
+        numero = teclado.nextLong();
         //Introducir -1 equivale a CANCELAR.
         if(numero != -1 && (numero < minimo || numero > maximo)){
             numero = leerNumero(teclado, mensaje, minimo, maximo);
@@ -61,7 +61,7 @@ public class Utilidades {
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         System.out.print(mensaje);
         double numero;
-        numero = teclado.nextInt();
+        numero = teclado.nextDouble();
         //Introducir -1 equivale a CANCELAR.
         if(numero != -1 && (numero < minimo || numero > maximo)){
             numero = leerNumero(teclado, mensaje, minimo, maximo);

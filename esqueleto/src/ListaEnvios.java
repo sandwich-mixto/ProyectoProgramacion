@@ -152,29 +152,27 @@ public class ListaEnvios {
      * @return fichero con los envíos añadidos.
      */
     public boolean aniadirEnviosCsv(String fichero) {
-        PrintWriter pw = null;
-        FileWriter fw = null;
+        boolean resultado = false;
+        PrintWriter salida;
+        Envio envio;
         try {
-            fw = new FileWriter(fichero, true);
-            pw = new PrintWriter(fw);
-            for (int i = 0; i < envios.length; i++){
-                listarEnvios();
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        } finally {
-            if (pw != null){
-                pw.close();
-            }
-            if (fw != null){
-                try {
-                    fw.close();
-                }catch (IOException e){
-                    return false;
+            salida = new PrintWriter(fichero);
+            for(int i = 0; i < envios.length; i++){
+                envio = envios[i];
+                if(envio != null){
+                    salida.println(envio.getLocalizador() + ";" + envio.getPorte() + ";" + envio.getCliente().getEmail() + ";" + envio.getFila() + ";" + envio.getColumna() + ";" + envio.getPrecio());
                 }
             }
+            salida.close();
+            resultado = true;
+        } catch (FileNotFoundException e){
+            resultado = false;
+            System.out.println("No se encontró el fichero " + fichero);
+        } catch (Exception e) {
+            resultado = false;
+            System.out.println("Error en la escritura de " + fichero);
         }
+        return resultado;
     }
 
     /**
@@ -192,7 +190,7 @@ public class ListaEnvios {
         String [] argumentos;
         try {
             entrada = new Scanner(new File(ficheroEnvios));
-            while (entrada.hasNextLine()) {
+            while (entrada.hasNextLine() && !portes.estaLlena() && !clientes.estaLlena()) {
                 linea = entrada.nextLine();
                 argumentos = linea.split(";");
                 cliente = clientes.buscarClienteEmail(argumentos[2]);

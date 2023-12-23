@@ -56,13 +56,17 @@ public class PlanetExpress {
      * @param ficheroEnvios Fichero para guardar envíos.
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
+        ListaEnvios listaEnvios = new ListaEnvios(maxEnviosPorCliente*maxClientes);
+        for (int i = 0; i < listaClientes.getOcupacion(); i++) {
+            for (int j = 0; j < listaClientes.getCliente(i).getListaEnvios().getOcupacion(); j++) {
+                listaEnvios.insertarEnvio(listaClientes.getCliente(i).getEnvio(j));
+            }
+        }
         listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
         listaNaves.escribirNavesCsv(ficheroNaves);
         listaPortes.escribirPortesCsv(ficheroPortes);
         listaClientes.escribirClientesCsv(ficheroClientes);
-        for(int i = 0; i < listaPortes.getOcupacion(); i++){
-            listaPortes.getPorte(i).generarListaEnvios(ficheroEnvios);
-        }
+        listaEnvios.aniadirEnviosCsv(ficheroEnvios);
     }
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
@@ -192,6 +196,9 @@ public class PlanetExpress {
                             case 'e':
                                 if(coincidentes != null ) {
                                     do {
+                                        for (int i = 0; i < coincidentes.getOcupacion(); i++) {
+                                            System.out.println(coincidentes.getPorte(i).toStringSimple());
+                                        }
                                         porteSeleccionado = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
                                     } while (porteSeleccionado != null && porteSeleccionado.porteLleno());
                                     planetExpress.contratarEnvio(teclado, rand, porteSeleccionado);

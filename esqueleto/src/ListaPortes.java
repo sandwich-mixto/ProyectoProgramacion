@@ -125,7 +125,7 @@ public class ListaPortes {
             PrintWriter pw = new PrintWriter(fichero);
             Porte porte;
             for(int i = 0; i < portes.length; i++){
-                porte = this.getPorte(i);
+                porte = getPorte(i);
                 if(porte != null){
                     pw.println(porte.getID() + ";" + porte.getNave().getMatricula() + ";" + porte.getOrigen().getCodigo() + ";" + porte.getMuelleOrigen() + ";" + porte.getSalida().toString() + ";" + porte.getDestino().getCodigo() + ";" + porte.getMuelleDestino() + ";" + porte.getLlegada().toString() + ";" + porte.getPrecio());
                 }
