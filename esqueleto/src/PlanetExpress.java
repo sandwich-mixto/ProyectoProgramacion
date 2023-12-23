@@ -196,6 +196,7 @@ public class PlanetExpress {
                                 }
                             case 'e':
                                 if(coincidentes != null ) {
+                                    teclado.nextLine();//Elimina un salto de línea.
                                     do {
                                         porteSeleccionado = coincidentes.seleccionarPorte(teclado, "Seleccione porte: ", "CANCELAR");
                                     } while (porteSeleccionado != null && porteSeleccionado.porteLleno());

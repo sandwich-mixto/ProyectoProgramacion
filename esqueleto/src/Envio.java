@@ -143,7 +143,7 @@ public class Envio {
         precio = Utilidades.leerNumero(teclado, "Precio del envío: ", 1.00, 999999999.99);
         if(precio != -1 && columna != -1 && fila != -1){
             String localizador = generarLocalizador(rand, porte.getID());
-            envio = new Envio(localizador, porte, cliente, fila, columna, precio);
+            envio = new Envio(localizador, porte, cliente, fila-1, columna-1, precio);
             cliente.aniadirEnvio(envio);
             System.out.println("Envío " + localizador + " creado correctamente. ");
         }
