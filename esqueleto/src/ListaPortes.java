@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 /**
- * Description of the class
+ * Description of the class: Lista en la que se guardan los portes planeados.
  * @author Carlos Gonzalez DIaz.
  * @author Jorge Jiménez Navas
  * @version     1.0

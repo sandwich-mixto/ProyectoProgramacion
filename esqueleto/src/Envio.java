@@ -3,7 +3,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 /**
- * Description of the class.
+ * Description of the class: Clase equivalente a un envío.
  * Clase que representa un envío con su localizador, porte, cliente, posición y precio.
  * @author Carlos Gonzalez Diaz.
  * @author Jorge Jiménez Navas

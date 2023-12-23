@@ -2,7 +2,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 /**
- * Description of the class
+ * Description of the class: Clase que representa un puerto espacial.
  *
  * @author Jorge Jiménez Navas
  * @author Carlos Gonzalez Díaz

@@ -1,5 +1,5 @@
 /**
- * Description of the class
+ * Description of the class: Clase que representa una nave espacial con sus atributos.
  *
  * @author Carlos Gonzalez Diaz
  * @author Jorge Jiménez Navas

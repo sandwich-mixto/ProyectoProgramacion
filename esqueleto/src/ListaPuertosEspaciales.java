@@ -78,17 +78,14 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
-        boolean encontrado = false;
-        String codigo = "";
-        while (!encontrado){
-            System.out.println(mensaje);
-            codigo = teclado.next();
-            puertoEspacial = buscarPuertoEspacial(codigo);
-            encontrado = puertoEspacial != null;
-            if (!encontrado){
-                System.out.println("Código de puerto no encontrado");
+        String cadena;
+        do{
+            cadena = Utilidades.leerCadena(teclado, mensaje);
+            puertoEspacial = buscarPuertoEspacial(cadena);
+            if(puertoEspacial == null && !cadena.equals("CANCELAR")){
+                System.out.println("Puerto espacial no encontrado. ");
             }
-        }
+        }while (!cadena.equals("CANCELAR") && puertoEspacial == null);
         return puertoEspacial;
     }
     /**

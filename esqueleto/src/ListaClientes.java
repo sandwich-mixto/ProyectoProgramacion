@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Description of the class: Lista para ordenar los clientes.
  *
  * @author Jorge Jimenez Navas
  * @author Carlos Gonzalez Diaz

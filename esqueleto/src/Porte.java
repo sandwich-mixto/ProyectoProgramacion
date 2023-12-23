@@ -1,10 +1,9 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 /**
- * Description of the class
+ * Description of the class: CLase que representa un viaje con su respectivo cargamento.
  *
  * @author Carlos Gonzalez Diaz
  * @author Jorge Jiménez Navas
@@ -238,41 +237,29 @@ public class Porte {
      * @return Porte con los datos adecuados. Null si se cancela.
      */
     public static Porte altaPorte(Scanner teclado, Random rand, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves, ListaPortes portes) {
-        String cadenaOrigen;
-        String cadenaDestino = "CANCELAR";
-        String matricula = "CANCELAR";
         Porte porte = null;
         String id;
         PuertoEspacial origen;
         int muelleOrigen = -1;
         PuertoEspacial destino = null;
-        Nave nave = null;
         int muelleDestino = -1;
+        Nave nave = null;
         Fecha salida = null;
         Fecha llegada = null;
         double precio = -1;
         do {
             id = generarID(rand);
         } while (portes.buscarPorte(id) != null);
-        do {
-            cadenaOrigen = Utilidades.leerCadena(teclado, "Puerto de origen: ");
-            origen = puertosEspaciales.buscarPuertoEspacial(cadenaOrigen);
-        } while (!cadenaOrigen.equals("CANCELAR") && origen == null);
-        if(!cadenaOrigen.equals("CANCELAR")) {
+        origen = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese el código del puerto de origen: ");
+        if(origen != null) {
             muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de origen (1 - " + origen.getMuelles() + "): ", 1, origen.getMuelles());
             if(muelleOrigen != -1) {
-                do {
-                    cadenaDestino = Utilidades.leerCadena(teclado, "Ingrese el código del puerto de destino: ");
-                    destino = puertosEspaciales.buscarPuertoEspacial(cadenaDestino);
-                }while (!cadenaDestino.equals("CANCELAR") && destino == null);
-                if(!cadenaDestino.equals("CANCELAR")) {
+                destino = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese el código del puerto de destino: ");
+                if(destino != null) {
                     muelleDestino = Utilidades.leerNumero(teclado, "Ingrese terminal de de destino (1 - " + destino.getMuelles() + "): ", 1, destino.getMuelles());
                     if(muelleDestino != -1) {
                         naves.mostrarNaves();
-                        do {
-                            matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
-                            nave = naves.buscarNave(matricula);
-                        } while (!matricula.equals("CANCELAR") && (nave == null || nave.getAlcance() < origen.distancia(destino)));
+                        nave = naves.seleccionarNave(teclado, "Ingrese matrícula de la nave: ", origen.distancia(destino));
                         if(nave != null) {
                             salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
                             if(salida != null) {
@@ -288,7 +275,7 @@ public class Porte {
                 }
             }
         }
-        if(!cadenaOrigen.equals("CANCELAR") && muelleOrigen != -1 && !cadenaDestino.equals("CANCELAR") && muelleDestino != -1 && !matricula.equals("CANCELAR") && llegada != null && salida != null && precio >= 0) {
+        if(origen != null && muelleOrigen != -1 && destino != null && muelleDestino != -1 && llegada != null && salida != null && precio >= 0) {
             porte = new Porte(id, nave, origen, muelleOrigen, salida, destino, muelleDestino, llegada, precio);
             System.out.println("Porte " + porte.getID() + " creado con éxito.");
         }

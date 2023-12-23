@@ -68,7 +68,7 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        Cliente resul;
+        Cliente resul = null;
         String nombre, apellidos = "CANCELAR", email = "CANCELAR";
         nombre = Utilidades.leerCadena(teclado, "Nombre: ");
         if(!nombre.equals("CANCELAR")){
@@ -79,7 +79,7 @@ public class Cliente {
                 } while (!correctoEmail(email) && clientes.buscarClienteEmail(email) != null && !email.equals("CANCELAR"));
             }
         }
-        if(!nombre.equals("CANCELAR") && !apellidos.equals("CANCELAR") && !email.equals("CANCELAR"));{
+        if(!nombre.equals("CANCELAR") && !apellidos.equals("CANCELAR") && !email.equals("CANCELAR") && Cliente.correctoEmail(email)){
             resul = new Cliente(nombre, apellidos, email, maxEnvios);
         }
         return resul;

@@ -145,7 +145,7 @@ public class Utilidades {
         }while (!Fecha.comprobarFecha(dia, mes, anio) || !Fecha.comprobarHora(hora, minuto, segundo));
         if (dia != -1 && mes != -1 && anio != -1 && hora != -1 && minuto != -1 && segundo != -1 && (!Fecha.comprobarFecha(dia, mes, anio) || !Fecha.comprobarHora(hora, minuto, segundo))) {
             fecha = leerFechaHora(teclado, "Fecha incorrecta.\n" + mensaje);
-        } else {fecha = new Fecha(dia, mes, anio);}
+        } else fecha = new Fecha(dia, mes, anio, hora, minuto, segundo);
         return fecha;
     }
     /**

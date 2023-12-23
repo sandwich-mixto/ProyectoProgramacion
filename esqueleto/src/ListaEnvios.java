@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Description of the class: Lista que guarda una serie de envíos.
  *
  * @author Jorge Jimenez Navas
  * @author Carlos Gonzalez Diaz
