@@ -104,6 +104,7 @@ public class ListaNaves {
      */
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw;
+        boolean resul = true;
         try {
             pw = new PrintWriter(nombre);
             for(int i = 0; i < naves.length; i++){
@@ -112,10 +113,10 @@ public class ListaNaves {
                 }
             }
             pw.close();
-            return true;
         } catch (Exception e) {
-            return false;
+            resul = false;
         }
+        return resul;
     }
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
